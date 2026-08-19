@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="120" viewBox="0 0 520 120" role="img" aria-label="NextGen Blinds">
+  <rect width="520" height="120" fill="none"/>
+  <g>
+    <rect x="4" y="30" width="10" height="60" fill="#4572B5"/>
+    <rect x="18" y="30" width="10" height="60" fill="#BD9A5F"/>
+    <rect x="32" y="30" width="10" height="60" fill="#4572B5"/>
+  </g>
+  <text x="54" y="58" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="600" fill="#16212E">NextGen</text>
+  <text x="54" y="92" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="600" fill="#4572B5">Blinds</text>
+</svg>
