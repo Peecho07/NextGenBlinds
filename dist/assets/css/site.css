@@ -153,14 +153,14 @@ a:hover{color:var(--blue-dk)}
 @media (max-width:640px){.families{grid-template-columns:1fr}}
 
 /* Choose by need */
-.needs{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
-.need{padding:var(--s3);border-left:1px solid var(--line)}
-.need:first-child{border-left:0}
+.needs{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.need{flex:0 0 calc((100% - 48px)/5);padding:var(--s3);background:#fff;border:1px solid var(--line);border-radius:8px;text-align:center}
+
 .need h3{font-family:var(--sans);font-size:17px;font-weight:800;margin-bottom:8px}
 .need p{font-size:15px;color:var(--muted);margin-bottom:12px}
 .need .fits{font-size:14px;color:var(--ink)}
-@media (max-width:1000px){.needs{grid-template-columns:1fr 1fr}.need{border-left:0;border-top:1px solid var(--line)}.need:nth-child(even){border-left:1px solid var(--line)}.need:nth-child(-n+2){border-top:0}}
-@media (max-width:600px){.needs{grid-template-columns:1fr}.need:nth-child(even){border-left:0}.need:nth-child(2){border-top:1px solid var(--line)}}
+@media (max-width:1000px){.need{flex-basis:calc((100% - 24px)/3)}}
+@media (max-width:600px){.need{flex-basis:100%}}
 
 /* Split */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6);align-items:center}
@@ -346,3 +346,16 @@ fieldset.field{border:0;margin:0 0 var(--s3);padding:0;min-width:0}
 
 /* Logo in the dark footer: knock out to white */
 .footer-brand .brand img{height:40px;filter:brightness(0) invert(1);margin-bottom:var(--s2)}
+/* Equal cards, one-row tabs */
+.family .media{flex:none}
+.why{align-items:stretch}
+.why li{text-align:center}
+.pf-filters{gap:6px}
+.pf-chip{padding:6px 12px;font-size:14px;min-height:40px}
+.pf-chip .n{padding:1px 7px}
+/* Portfolio tabs: even 4 x 2 grid of equal buttons on desktop and tablet */
+@media (min-width:641px){
+  .pf-filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:none}
+  .pf-chip{justify-content:center;width:100%;white-space:nowrap}
+}
+@media (min-width:641px) and (max-width:1000px){.pf-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
