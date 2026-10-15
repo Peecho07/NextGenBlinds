@@ -121,6 +121,8 @@ function portfolioPreview() {
   }).join('') + `</ul>`;
 }
 
+const assetVersion = p => require('crypto').createHash('sha1').update(fs.readFileSync(path.join(SRC, p))).digest('hex').slice(0, 8);
+
 function parsePage(file) {
   const raw = read(file);
   const m = raw.match(/^<!--\s*(\{[\s\S]*?\})\s*-->\s*/);
@@ -200,7 +202,7 @@ for (const file of walk(path.join(SRC, 'pages'))) {
     serviceArea: site.serviceArea, year: String(new Date().getFullYear()), legalName: site.legalNameApproved ? ' · ' + esc(site.legalName) : '',
     social: socialHtml()
   };
-  const html = fill(layout, {
+  let html = fill(layout, {
     title: esc(meta.title),
     description: esc(meta.description || ''),
     canonical: meta.path === '/404.html' ? '' : `<link rel="canonical" href="${site.origin}${meta.path}">`,
@@ -217,6 +219,8 @@ for (const file of walk(path.join(SRC, 'pages'))) {
   });
   const out = outPath(meta.path);
   fs.mkdirSync(path.dirname(out), { recursive: true });
+  // Cache-bust CSS/JS with a content hash so browsers never pair new HTML with stale styles.
+  html = html.replace(/(href|src)="(\/assets\/(?:css|js)\/[^"?]+)"/g, (_, a, p) => `${a}="${p}?v=${assetVersion(p)}"`);
   const rooted = BASE
     ? html.replace(/\b(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`).replace('<html lang="en">', `<html lang="en" data-base="${BASE}">`)
     : html;
