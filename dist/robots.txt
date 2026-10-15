@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /thank-you/
+Disallow: /api/
+
+Sitemap: https://www.nextgenblinds.com/sitemap.xml

@@ -1,0 +1,65 @@
+{
+  "_note": "Single source of truth for every route in the master prompt. status: built = rendered and linkable; planned = not built yet, never linked; gated = needs owner confirmation before it can exist publicly. Navigation and footer only link routes with status built.",
+  "routes": [
+    {"path": "/", "title": "Home", "type": "home", "status": "built", "index": true, "phase": 1},
+    {"path": "/contact-us/", "title": "Request a Consultation", "type": "contact", "status": "built", "index": true, "phase": 1},
+    {"path": "/thank-you/", "title": "Request Confirmation", "type": "utility", "status": "built", "index": false, "phase": 1},
+    {"path": "/404.html", "title": "Not Found", "type": "utility", "status": "built", "index": false, "phase": 1},
+    {"path": "/privacy-policy/", "title": "Privacy Policy", "type": "legal", "status": "built", "index": true, "phase": 1, "blocker": "Draft. Owner and counsel review required before launch."},
+
+    {"path": "/indoor-window-treatments/", "title": "Indoor Treatments", "type": "category", "status": "planned", "index": true, "phase": 2},
+    {"path": "/services/blinds/", "title": "Custom Blinds", "type": "product", "status": "planned", "index": true, "phase": 2, "interest": "blinds"},
+    {"path": "/services/shades/", "title": "Shades", "type": "category", "status": "planned", "index": true, "phase": 2, "interest": "shades"},
+    {"path": "/services/motorized-shades/", "title": "Motorized Shades", "type": "product", "status": "planned", "index": true, "phase": 2, "interest": "motorized-shades"},
+    {"path": "/services/plantation-shutters/", "title": "Plantation Shutters", "type": "product", "status": "planned", "index": true, "phase": 2, "interest": "shutters"},
+    {"path": "/services/custom-drapery/", "title": "Custom Drapery", "type": "product", "status": "planned", "index": true, "phase": 2, "interest": "drapery"},
+    {"path": "/services/roller-solar-shades/", "title": "Roller & Solar Shades", "type": "product", "status": "planned", "index": true, "phase": 2, "interest": "roller-solar"},
+    {"path": "/services/zebra-banded-shades/", "title": "Zebra & Banded Shades", "type": "product", "status": "planned", "index": true, "phase": 2, "interest": "zebra"},
+
+    {"path": "/outdoor-window-treatments/", "title": "Outdoor Living", "type": "category", "status": "gated", "index": true, "phase": 3, "blocker": "Confirm outdoor products are actually sold and installed."},
+    {"path": "/services/outdoor-motorized-screens/", "title": "Motorized Screens", "type": "product", "status": "gated", "index": true, "phase": 3, "interest": "outdoor-screens", "blocker": "Confirm product range, wind limits, install capability."},
+    {"path": "/services/exterior-solar-shades/", "title": "Exterior Solar Shades", "type": "product", "status": "gated", "index": true, "phase": 3, "interest": "exterior-solar", "blocker": "Confirm a distinct exterior offering exists; otherwise merge into screens."},
+    {"path": "/services/retractable-awnings/", "title": "Retractable Awnings", "type": "product", "status": "gated", "index": true, "phase": 3, "interest": "awnings", "blocker": "Confirm awnings are a real NextGen offering."},
+
+    {"path": "/portfolio-gallery/", "title": "Gallery", "type": "proof", "status": "gated", "index": true, "phase": 2, "blocker": "Needs rights-cleared install photos. Legacy URL, preserve."},
+    {"path": "/projects/[slug]/", "title": "Project Story", "type": "proof", "status": "gated", "index": true, "phase": 2, "blocker": "One page per documented, permissioned project only."},
+    {"path": "/about-us/", "title": "About", "type": "company", "status": "gated", "index": true, "phase": 2, "blocker": "Needs approved origin story, team photos, roles. Legacy URL, preserve."},
+    {"path": "/how-it-works/", "title": "Process", "type": "company", "status": "planned", "index": true, "phase": 2},
+
+    {"path": "/service-areas/", "title": "Service Areas", "type": "location-hub", "status": "planned", "index": true, "phase": 2},
+    {"path": "/service-areas/west-palm-beach/", "title": "West Palm Beach", "type": "location", "status": "gated", "index": true, "phase": 4, "blocker": "Needs a real local project or review."},
+    {"path": "/service-areas/palm-beach-gardens/", "title": "Palm Beach Gardens", "type": "location", "status": "gated", "index": true, "phase": 4, "blocker": "Needs a real local project or review."},
+    {"path": "/service-areas/jupiter/", "title": "Jupiter", "type": "location", "status": "gated", "index": true, "phase": 4, "blocker": "Needs a real local project or review."},
+    {"path": "/service-areas/wellington/", "title": "Wellington", "type": "location", "status": "gated", "index": true, "phase": 4, "blocker": "Needs a real local project or review."},
+    {"path": "/service-areas/royal-palm-beach/", "title": "Royal Palm Beach", "type": "location", "status": "gated", "index": true, "phase": 4, "blocker": "Needs a real local project or review."},
+    {"path": "/service-areas/boca-raton/", "title": "Boca Raton", "type": "location", "status": "gated", "index": true, "phase": 4, "blocker": "Needs a real local project or review."},
+    {"path": "/service-areas/delray-beach/", "title": "Delray Beach", "type": "location", "status": "gated", "index": true, "phase": 4, "blocker": "Needs a real local project or review."},
+    {"path": "/service-areas/boynton-beach/", "title": "Boynton Beach", "type": "location", "status": "gated", "index": true, "phase": 4, "blocker": "Needs a real local project or review."},
+
+    {"path": "/window-treatment-faqs/", "title": "FAQs", "type": "resource", "status": "planned", "index": true, "phase": 2, "note": "Legacy URL, preserve."},
+    {"path": "/resources/", "title": "Resources", "type": "resource", "status": "planned", "index": true, "phase": 3},
+    {"path": "/resources/window-treatment-cost-guide/", "title": "Cost Guide", "type": "resource", "status": "planned", "index": true, "phase": 3},
+    {"path": "/resources/solar-shades-nighttime-privacy/", "title": "Privacy & Light Guide", "type": "resource", "status": "planned", "index": true, "phase": 3},
+    {"path": "/terms/", "title": "Website Terms", "type": "legal", "status": "planned", "index": true, "phase": 2},
+    {"path": "/accessibility/", "title": "Accessibility", "type": "legal", "status": "planned", "index": true, "phase": 2},
+
+    {"path": "/lp/free-consultation/", "title": "Campaign: Free Consultation", "type": "campaign", "status": "gated", "index": false, "phase": 5, "blocker": "Launch only after lead delivery is verified live."},
+    {"path": "/lp/motorized-shades/", "title": "Campaign: Motorized", "type": "campaign", "status": "gated", "index": false, "phase": 5, "blocker": "Launch only after lead delivery is verified live."},
+    {"path": "/lp/plantation-shutters/", "title": "Campaign: Shutters", "type": "campaign", "status": "gated", "index": false, "phase": 5, "blocker": "Launch only after lead delivery is verified live."},
+    {"path": "/lp/outdoor-screens/", "title": "Campaign: Outdoor Screens", "type": "campaign", "status": "gated", "index": false, "phase": 5, "blocker": "Requires outdoor offering confirmation and live lead delivery."}
+  ],
+  "nav": [
+    {"label": "Indoor Treatments", "path": "/indoor-window-treatments/", "children": ["/services/blinds/", "/services/shades/", "/services/motorized-shades/", "/services/plantation-shutters/", "/services/custom-drapery/", "/services/roller-solar-shades/", "/services/zebra-banded-shades/"]},
+    {"label": "Outdoor Living", "path": "/outdoor-window-treatments/", "children": ["/services/outdoor-motorized-screens/", "/services/exterior-solar-shades/", "/services/retractable-awnings/"]},
+    {"label": "Our Work", "path": "/portfolio-gallery/"},
+    {"label": "Why NextGen", "path": "/about-us/", "children": ["/about-us/", "/how-it-works/"]},
+    {"label": "Resources", "path": "/resources/", "children": ["/window-treatment-faqs/", "/resources/window-treatment-cost-guide/", "/resources/solar-shades-nighttime-privacy/"]},
+    {"label": "Service Areas", "path": "/service-areas/"}
+  ],
+  "legacyRedirectCandidates": [
+    {"from": "/services/drapes/", "to": "/services/custom-drapery/", "status": "verify-live-first"},
+    {"from": "/services/motorization/", "to": "/services/motorized-shades/", "status": "verify-live-first"},
+    {"from": "/services/motorized-screens/", "to": "/services/outdoor-motorized-screens/", "status": "verify-live-first"},
+    {"from": "/services/solar-shades/", "to": "DECIDE indoor vs exterior", "status": "verify-live-first"}
+  ]
+}

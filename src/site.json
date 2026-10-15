@@ -1,0 +1,24 @@
+{
+  "_note": "Provisional business inputs from the master prompt. Every field marked in owner-register.md needs owner approval before launch.",
+  "name": "NextGen Blinds",
+  "legalName": "LKPM Group LLC",
+  "legalNameApproved": false,
+  "origin": "https://www.nextgenblinds.com",
+  "phone": "561-332-8091",
+  "phoneE164": "+15613328091",
+  "email": "admin@nextgenblinds.com",
+  "serviceArea": "Palm Beach County, Florida",
+  "products": [
+    {"id": "blinds", "name": "Custom Blinds"},
+    {"id": "shades", "name": "Shades"},
+    {"id": "motorized-shades", "name": "Motorized Shades"},
+    {"id": "shutters", "name": "Plantation Shutters"},
+    {"id": "drapery", "name": "Custom Drapery"},
+    {"id": "roller-solar", "name": "Roller & Solar Shades"},
+    {"id": "zebra", "name": "Zebra & Banded Shades"},
+    {"id": "outdoor-screens", "name": "Outdoor Motorized Screens", "gated": true},
+    {"id": "exterior-solar", "name": "Exterior Solar Shades", "gated": true},
+    {"id": "awnings", "name": "Retractable Awnings", "gated": true},
+    {"id": "not-sure", "name": "Not sure yet"}
+  ]
+}

@@ -1,55 +1,68 @@
-# NextGen Blinds — Website
+# NextGen Blinds Website (Phase 1)
 
-Static site, no build step, no framework. Every page is plain HTML/CSS/JS
-so it can be hosted anywhere that serves static files.
+Static multi-page site with a real server-side lead endpoint. Built from the 2027 Rebuild Strategy audit and the Master Rebuild Prompt.
 
-## Structure
+## What's in Phase 1
+
+| Route | Status |
+|---|---|
+| `/` | Built. Full homepage per the master prompt sequence. |
+| `/contact-us/` | Built. Short progressive form (name, ZIP, contact method + matching field; everything else optional). |
+| `/thank-you/` | Built. Shows only after a server-accepted lead; neutral state on direct visits. Noindex. |
+| `/privacy-policy/` | Built as a draft. Needs review before launch. |
+| `404.html` | Built. Returns a real 404. |
+
+All 41 routes from the master prompt are tracked in `src/routes.json` with status `built`, `planned`, or `gated`. Navigation and footer only link built pages, so nothing points at an unfinished route. Until a product page exists, product cards link to the consultation form with that product preselected.
+
+## Run it locally
 
 ```
-index.html                              Homepage
-404.html                                Not-found page
-assets/style.css                        Shared styles (all pages)
-assets/lead-form.js                     Contact form submit logic (all pages)
-assets/logo.svg                         PLACEHOLDER logo — replace with the real one
-services/motorized-shades/index.html
-services/plantation-shutters/index.html
-services/custom-drapery/index.html
-services/roller-solar-shades/index.html
-services/zebra-banded-shades/index.html
-services/outdoor-motorized-screens/index.html
-services/retractable-awnings/index.html
-netlify.toml                            Netlify config (safe to ignore on other hosts)
+node tools/make-art.js        # regenerate draft illustrations (only if edited)
+node build.js --preview       # build to dist/ with draft banner, everything noindex
+node dev-server.mjs           # http://localhost:8787, leads saved to .local-leads.jsonl
+FAIL=storage node dev-server.mjs   # simulate an outage to see the error state
 ```
 
-## What you still need to do before this can go live
+`node build.js` (no flag) makes the production build: indexable pages, real robots.txt and sitemap.
 
-1. **Get a Web3Forms access key** (free) at https://web3forms.com — sign up
-   with `admin@nextgenblinds.com`, copy the key it gives you, then replace
-   every occurrence of `REPLACE_WITH_YOUR_WEB3FORMS_KEY` in the `.html`
-   files (one per page) with that key. Without this, the "Request My Free
-   Consultation" form will not deliver leads to you.
+## Adding the next page
 
-2. **Replace the placeholder logo.** `assets/logo.svg` is a text placeholder
-   so the site doesn't show broken images. Drop in your real logo as
-   `assets/logo.png` (or `.svg`) and update the `src="/assets/logo.svg"`
-   references, or just overwrite `logo.svg` with your real logo file (same
-   filename, same folder).
+1. Create `src/pages/<path>/index.html` with the JSON front matter (copy `contact-us` as a model).
+2. Set that route's status to `built` in `src/routes.json`.
+3. Rebuild. Nav, footer, sitemap, and product-card links update automatically.
 
-3. **Add real photos.** Every "Your install photo" / "Showcase photo" box
-   is a placeholder `<div>` styled to look intentional, not a broken image.
-   Replace those with actual jobsite photos once available.
+## Deploy to Cloudflare Pages
 
-4. **Deploy to Netlify** (recommended, free tier):
-   - Push this repo to GitHub (already done if you're reading this from the repo).
-   - Go to https://app.netlify.com → "Add new site" → "Import an existing project" → connect GitHub → pick this repo.
-   - Build command: leave blank. Publish directory: `.` (repo root).
-   - Deploy — Netlify gives you a temporary `*.netlify.app` URL immediately.
+1. Push this folder to a GitHub repo. In Cloudflare Pages, create a project from it.
+2. Build command: `node build.js`. Output directory: `dist`.
+3. Settings > Functions > KV bindings: create a namespace and bind it as `LEADS`.
+4. Settings > Environment variables:
+   - `RESEND_API_KEY` (secret) from resend.com, with the nextgenblinds.com domain verified
+   - `NOTIFY_FROM` e.g. `NextGen Website <leads@nextgenblinds.com>`
+   - `NOTIFY_TO` the inbox that receives leads (comma-separate for several)
+   - `ALLOWED_ORIGIN` `https://www.nextgenblinds.com`
+   - `IP_SALT` any random string
+5. Deploy the retry worker in `workers/notify-retry.js` with a Cron Trigger (`*/10 * * * *`), bound to the same `LEADS` namespace and env vars. Optional `ALERT_WEBHOOK` for a Slack or Discord ping if a lead fails delivery 5 times.
+6. Protect the preview URL with Cloudflare Access until launch.
+7. Run one real test submission and confirm the email arrives before pointing DNS at it.
 
-5. **Point nextgenblinds.com at Netlify.** In Netlify: Site settings →
-   Domain management → Add custom domain → `nextgenblinds.com`. Netlify
-   will show you the DNS records to add at your domain registrar
-   (usually an A record + CNAME, or Netlify DNS if you delegate the whole
-   domain). Once DNS propagates, Netlify auto-issues a free SSL certificate.
+If `LEADS` is not bound, the form returns "temporarily unavailable" and shows the phone number. It never fakes a success.
 
-After that, every future push to this branch/repo auto-deploys — no
-manual re-upload needed.
+## Lead flow
+
+Browser validates → `POST /api/lead` with an Idempotency-Key → server validates, rate limits, drops honeypot spam → stores in KV with a reference ID (`NG-YYMMDD-XXXXXX`) → responds `201` → browser goes to `/thank-you/?ref=…` → email notification sent after the response; failures stay queued and the cron worker retries.
+
+## Tested in this build
+
+- Valid lead stored, duplicate key returns the same ID, double click creates one lead
+- Server validation (422) with field messages, honeypot, GET returns 405, unknown path returns 404
+- Outage: form stays, values kept, phone shown, button becomes "Try Again"
+- Thank-you direct visit shows the neutral state; conversion event fires once per lead
+- No horizontal overflow at 360, 390, 768, 1024, 1440px; mobile menu and Escape behavior
+- Not yet tested: live Cloudflare deploy, real email delivery, screen reader pass
+
+## Files
+
+- `owner-register.md` every claim and asset still needing owner approval
+- `src/routes.json` route manifest for the full site
+- `functions/` production lead endpoint; `workers/` notification retry

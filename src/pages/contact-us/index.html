@@ -1,0 +1,42 @@
+<!--
+{
+  "path": "/contact-us/",
+  "title": "Request a Consultation | NextGen Blinds",
+  "description": "Request a free in-home window treatment consultation in Palm Beach County. Share a few details and we'll contact you to schedule.",
+  "breadcrumbs": [["Home", "/"], ["Request a Consultation", "/contact-us/"]],
+  "noActionBar": true
+}
+-->
+<section class="section tight" style="padding-top:var(--s3)">
+  <div class="wrap inquiry">
+    <div>
+      <span class="eyebrow">Free in-home consultation</span>
+      <h1>Let's Find the Right Treatment for Your Space</h1>
+      <p class="lead">Share how to reach you and we'll follow up to schedule a visit. We bring samples so you can compare options at your own windows.</p>
+
+      <h2 style="font-size:24px;margin-top:var(--s4)">What happens next</h2>
+      <!-- OWNER_CONFIRM: response window and scheduling model -->
+      <ol class="steps" style="grid-template-columns:1fr;gap:var(--s3)">
+        <li><h3>We contact you</h3><p>Someone from our team reaches out by your preferred method to find a visit time.</p></li>
+        <li><h3>Consultation and measure</h3><p>We review your rooms, show samples, and measure if you're ready.</p></li>
+        <li><h3>Your written proposal</h3><p>You get the products, options, and price in writing. No obligation.</p></li>
+      </ol>
+
+      <h2 style="font-size:24px;margin-top:var(--s4)">Helpful to have ready</h2>
+      <ul class="checks">
+        <li>Which rooms you'd like to start with</li>
+        <li>What bothers you most: glare, privacy, darkness, or style</li>
+        <li>Whether you want motorization or smart-home control</li>
+      </ul>
+
+      <h2 style="font-size:24px;margin-top:var(--s4)">Reach us directly</h2>
+      <ul class="contact-list">
+        <li><b>Phone</b><a href="tel:{{phoneE164}}">{{phone}}</a></li>
+        <li><b>Email</b><a href="mailto:{{email}}">{{email}}</a></li>
+        <li><b>Service area</b><span>{{serviceArea}}</span></li>
+        <!-- OWNER_CONFIRM: business hours -->
+      </ul>
+    </div>
+    {{leadForm}}
+  </div>
+</section>

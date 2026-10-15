@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Illustration of a fabric shade partly lowered on a window">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD6EA"/><stop offset="1" stop-color="#E9F1F7"/></linearGradient>
+<linearGradient id="sun" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF6E0" stop-opacity=".9"/><stop offset="1" stop-color="#FFF6E0" stop-opacity="0"/></linearGradient></defs>
+<rect width="800" height="500" fill="#EDE6DA"/>
+<rect y="430" width="800" height="70" fill="#D9CBB5"/>
+<rect y="428" width="800" height="4" fill="#C9B89E"/>
+<rect x="236" y="56" width="328" height="328" fill="#FFFFFF"/>
+<rect x="250" y="70" width="300" height="300" fill="url(#sky)"/>
+<g transform="translate(466 370) scale(1.1)" opacity=".55"><path d="M0 0 C4 -40 2 -80 8 -120" stroke="#6E8A6A" stroke-width="5" fill="none"/><g fill="#7D9B78"><path d="M8 -120 c-30 -10 -55 0 -70 18 c25 -8 45 -10 70 -18z"/><path d="M8 -120 c30 -12 58 -2 72 16 c-26 -8 -48 -10 -72 -16z"/><path d="M8 -120 c-8 -26 -30 -40 -50 -42 c20 12 34 24 50 42z"/><path d="M8 -120 c10 -26 34 -38 54 -38 c-22 10 -38 22 -54 38z"/></g></g>
+<rect x="397" y="70" width="6" height="300" fill="#FFFFFF"/>
+<rect x="240" y="64" width="320" height="16" rx="3" fill="#E7E1D6"/><rect x="246" y="80" width="308" height="165" fill="#CFC5B5" opacity=".92"/><rect x="246" y="245" width="308" height="8" fill="#B9AD9A"/>
+<rect x="226" y="384" width="348" height="12" fill="#FFFFFF"/>
+<polygon points="250,370 550,370 710,430 130,430" fill="url(#sun)" opacity=".5"/>
+
+</svg>

@@ -1,0 +1,58 @@
+<!--
+{
+  "path": "/thank-you/",
+  "title": "Request Received | NextGen Blinds",
+  "description": "Your consultation request status.",
+  "noActionBar": true
+}
+-->
+<section class="section">
+  <div class="wrap read">
+    <!-- Shown only when this browser has a server-accepted request whose ID matches the URL -->
+    <div id="ty-ok" hidden>
+      <span class="eyebrow">Request received</span>
+      <h1>Your Consultation Request Has Been Received</h1>
+      <p class="lead">Thank you. Your reference number is <span class="ref-id" id="ty-ref"></span>.</p>
+      <div class="notice">
+        <p style="margin:0"><strong>This is a request, not a booked appointment.</strong> We'll contact you <span id="ty-method">using the method you chose</span> to find a time for your visit.</p>
+      </div>
+      <h2 style="font-size:24px;margin-top:var(--s5)">Before your visit</h2>
+      <ul class="checks">
+        <li>Think about which rooms to start with</li>
+        <li>Notice when glare or privacy is a problem during the day</li>
+        <li>If you use a smart-home system, note which one</li>
+      </ul>
+      <p>Need us sooner? Call <a href="tel:{{phoneE164}}">{{phone}}</a> and mention your reference number.</p>
+      <p><a class="link-arrow" href="/">Back to the homepage</a></p>
+    </div>
+    <!-- Neutral state for direct visits, refreshes in a new session, or mismatched IDs -->
+    <div id="ty-none">
+      <h1>Need to Request a Consultation?</h1>
+      <p class="lead">We don't see a recent request from this browser. If you already sent one, there's no need to send it again.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/contact-us/">Request a Free Consultation</a>
+        <a class="btn btn-secondary" href="tel:{{phoneE164}}">Call {{phone}}</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function () {
+  var ref = new URLSearchParams(location.search).get('ref');
+  var lead = null;
+  try { lead = JSON.parse(sessionStorage.getItem('ng_lead') || 'null'); } catch (e) {}
+  if (!ref || !lead || lead.id !== ref) return;
+  document.getElementById('ty-none').hidden = true;
+  document.getElementById('ty-ok').hidden = false;
+  document.getElementById('ty-ref').textContent = lead.id;
+  var m = { phone: 'by phone', text: 'by text', email: 'by email' }[lead.method];
+  if (m) document.getElementById('ty-method').textContent = m;
+  // Conversion fires once per accepted request, never on refresh.
+  var key = 'ng_conv_' + lead.id, done = false;
+  try { done = !!sessionStorage.getItem(key); } catch (e) {}
+  if (!done) {
+    if (window.dataLayer) window.dataLayer.push({ event: 'generate_lead', page: '/thank-you/' });
+    try { sessionStorage.setItem(key, '1'); } catch (e) {}
+  }
+})();
+</script>

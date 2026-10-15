@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request Received | NextGen Blinds</title>
+<meta name="description" content="Your consultation request status.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://www.nextgenblinds.com/thank-you/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="NextGen Blinds"><meta property="og:title" content="Request Received | NextGen Blinds"><meta property="og:description" content="Your consultation request status."><meta property="og:url" content="https://www.nextgenblinds.com/thank-you/">
+<meta name="theme-color" content="#172B3A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+</head>
+<body class="has-action-bar ">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="util">
+  <div class="wrap">
+    <span>Serving Palm Beach County, Florida</span>
+    <a href="tel:+15613328091">561-332-8091</a>
+  </div>
+</div>
+<header class="site-header">
+  <div class="wrap">
+    <!-- ASSET_REQUIRED: replace wordmark with the approved logo file at /assets/img/logo.svg -->
+    <a class="brand" href="/" aria-label="NextGen Blinds home"><span class="brand-mark">NextGen <span>Blinds</span></span></a>
+    <nav class="nav" aria-label="Main">
+      <ul><li><a class="top" href="/contact-us/">Contact</a></li></ul>
+    </nav>
+    <div class="hdr-actions">
+      <a class="hdr-phone" href="tel:+15613328091">561-332-8091</a>
+      <a class="btn btn-primary" href="/contact-us/">Request a Free Consultation</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav"><span class="bars"><span></span></span><span class="menu-label">Menu</span></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile">
+    <ul><li><a href="/contact-us/">Contact</a></li></ul>
+    <div class="wrap" style="padding-bottom:24px">
+      <a class="btn btn-primary" href="/contact-us/">Request a Free Consultation</a>
+      <a class="btn btn-secondary" href="tel:+15613328091">Call 561-332-8091</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1">
+
+<section class="section">
+  <div class="wrap read">
+    <!-- Shown only when this browser has a server-accepted request whose ID matches the URL -->
+    <div id="ty-ok" hidden>
+      <span class="eyebrow">Request received</span>
+      <h1>Your Consultation Request Has Been Received</h1>
+      <p class="lead">Thank you. Your reference number is <span class="ref-id" id="ty-ref"></span>.</p>
+      <div class="notice">
+        <p style="margin:0"><strong>This is a request, not a booked appointment.</strong> We'll contact you <span id="ty-method">using the method you chose</span> to find a time for your visit.</p>
+      </div>
+      <h2 style="font-size:24px;margin-top:var(--s5)">Before your visit</h2>
+      <ul class="checks">
+        <li>Think about which rooms to start with</li>
+        <li>Notice when glare or privacy is a problem during the day</li>
+        <li>If you use a smart-home system, note which one</li>
+      </ul>
+      <p>Need us sooner? Call <a href="tel:+15613328091">561-332-8091</a> and mention your reference number.</p>
+      <p><a class="link-arrow" href="/">Back to the homepage</a></p>
+    </div>
+    <!-- Neutral state for direct visits, refreshes in a new session, or mismatched IDs -->
+    <div id="ty-none">
+      <h1>Need to Request a Consultation?</h1>
+      <p class="lead">We don't see a recent request from this browser. If you already sent one, there's no need to send it again.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/contact-us/">Request a Free Consultation</a>
+        <a class="btn btn-secondary" href="tel:+15613328091">Call 561-332-8091</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function () {
+  var ref = new URLSearchParams(location.search).get('ref');
+  var lead = null;
+  try { lead = JSON.parse(sessionStorage.getItem('ng_lead') || 'null'); } catch (e) {}
+  if (!ref || !lead || lead.id !== ref) return;
+  document.getElementById('ty-none').hidden = true;
+  document.getElementById('ty-ok').hidden = false;
+  document.getElementById('ty-ref').textContent = lead.id;
+  var m = { phone: 'by phone', text: 'by text', email: 'by email' }[lead.method];
+  if (m) document.getElementById('ty-method').textContent = m;
+  // Conversion fires once per accepted request, never on refresh.
+  var key = 'ng_conv_' + lead.id, done = false;
+  try { done = !!sessionStorage.getItem(key); } catch (e) {}
+  if (!done) {
+    if (window.dataLayer) window.dataLayer.push({ event: 'generate_lead', page: '/thank-you/' });
+    try { sessionStorage.setItem(key, '1'); } catch (e) {}
+  }
+})();
+</script>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <p class="brand-mark" style="font-size:22px;margin-bottom:12px">NextGen <span>Blinds</span></p>
+        <p>Custom window treatments for homes across Palm Beach County, Florida.</p>
+      </div>
+      <div>
+        <h2>Products</h2>
+        <ul><li><a href="/contact-us/?interest=blinds">Custom Blinds</a></li><li><a href="/contact-us/?interest=shades">Shades</a></li><li><a href="/contact-us/?interest=motorized-shades">Motorized Shades</a></li><li><a href="/contact-us/?interest=shutters">Plantation Shutters</a></li><li><a href="/contact-us/?interest=drapery">Custom Drapery</a></li><li><a href="/contact-us/?interest=roller-solar">Roller &amp; Solar Shades</a></li><li><a href="/contact-us/?interest=zebra">Zebra &amp; Banded Shades</a></li></ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul><li><a href="/contact-us/">Request a Consultation</a></li></ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="tel:+15613328091">561-332-8091</a></li>
+          <li><a href="mailto:admin@nextgenblinds.com">admin@nextgenblinds.com</a></li>
+        </ul>
+        <p style="margin-top:12px">Serving Palm Beach County, Florida</p>
+      </div>
+    </div>
+    <div class="legal">
+      <span>&copy; 2026 NextGen Blinds</span>
+      <span><a href="/privacy-policy/">Privacy Policy</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>
