@@ -62,7 +62,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a'); if (!a) return;
     if (a.href.indexOf('tel:') === 0) track('phone_link_click', { page: location.pathname });
-    else if (a.getAttribute('href') && a.getAttribute('href').indexOf('/contact-us/') === 0) track('consultation_cta_click', { page: location.pathname });
+    else if (a.getAttribute('href') && a.getAttribute('href').indexOf('/contact-us/') !== -1) track('consultation_cta_click', { page: location.pathname });
   });
 
   /* Lead form */
@@ -168,7 +168,7 @@
       if (r.res.ok && r.body && r.body.accepted && r.body.id) {
         // Only a durable server acceptance reaches the confirmation page.
         safeStore.set('sessionStorage', 'ng_lead', JSON.stringify({ id: r.body.id, method: data.contact_method, at: Date.now() }));
-        location.assign('/thank-you/?ref=' + encodeURIComponent(r.body.id));
+        location.assign((document.documentElement.getAttribute('data-base') || '') + '/thank-you/?ref=' + encodeURIComponent(r.body.id));
         return;
       }
       var msg = (r.body && r.body.message) || 'We could not send your request.';

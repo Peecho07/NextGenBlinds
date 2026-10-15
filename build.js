@@ -9,6 +9,8 @@ const ROOT = __dirname;
 const SRC = path.join(ROOT, 'src');
 const DIST = path.join(ROOT, 'dist');
 const PREVIEW = process.argv.includes('--preview');
+// --base=/NextGenBlinds serves the site from a subfolder (GitHub Pages project sites).
+const BASE = ((process.argv.find(a => a.startsWith('--base=')) || '').slice(7) || process.env.BASE_PATH || '').replace(/\/+$/, '');
 const site = JSON.parse(fs.readFileSync(path.join(SRC, 'site.json'), 'utf8'));
 const routes = JSON.parse(fs.readFileSync(path.join(SRC, 'routes.json'), 'utf8'));
 const byPath = Object.fromEntries(routes.routes.map(r => [r.path, r]));
@@ -165,7 +167,10 @@ for (const file of walk(path.join(SRC, 'pages'))) {
   });
   const out = outPath(meta.path);
   fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, html.replace(/\n{3,}/g, '\n\n'));
+  const rooted = BASE
+    ? html.replace(/\b(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`).replace('<html lang="en">', `<html lang="en" data-base="${BASE}">`)
+    : html;
+  fs.writeFileSync(out, rooted.replace(/\r?\n(\r?\n){2,}/g, '\n\n'));
   built.push({ path: meta.path, index });
 }
 
