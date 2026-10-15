@@ -68,6 +68,22 @@ function footerCompany() {
   return list.map(p => `<li><a href="${p}">${esc(byPath[p].title)}</a></li>`).join('');
 }
 
+// Social icons. A platform with no URL in site.json still shows its icon, as plain text instead of a link.
+const socialIcons = {
+  instagram: ['Instagram', '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>'],
+  facebook: ['Facebook', '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.4V14h2.7v8z"/></svg>'],
+  youtube: ['YouTube', '<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8zM9.7 15.1V8.9l5.8 3.1z"/></svg>']
+};
+function socialHtml() {
+  const s = site.social || {};
+  return '<ul class="social">' + Object.keys(socialIcons).map(k => {
+    const [label, svg] = socialIcons[k];
+    return s[k]
+      ? `<li><a href="${esc(s[k])}" target="_blank" rel="noopener" aria-label="${site.name} on ${label}">${svg}</a></li>`
+      : `<li><span title="${label} link coming soon" aria-label="${label} (link coming soon)" role="img">${svg}</span></li>`;
+  }).join('') + '</ul>';
+}
+
 function footerLegal() {
   return ['/privacy-policy/', '/terms/', '/accessibility/'].filter(isBuilt)
     .map(p => `<a href="${p}">${esc(byPath[p].title)}</a>`).join(' · ');
@@ -181,7 +197,8 @@ for (const file of walk(path.join(SRC, 'pages'))) {
   const index = r.index && !PREVIEW;
   const shared = {
     phone: site.phone, phoneE164: site.phoneE164, email: site.email, name: site.name,
-    serviceArea: site.serviceArea, year: String(new Date().getFullYear()), legalName: site.legalNameApproved ? ' · ' + esc(site.legalName) : ''
+    serviceArea: site.serviceArea, year: String(new Date().getFullYear()), legalName: site.legalNameApproved ? ' · ' + esc(site.legalName) : '',
+    social: socialHtml()
   };
   const html = fill(layout, {
     title: esc(meta.title),

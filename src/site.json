@@ -8,6 +8,12 @@
   "phoneE164": "+15613328091",
   "email": "admin@nextgenblinds.com",
   "serviceArea": "Palm Beach County, Florida",
+  "_socialNote": "Paste each profile URL. An empty value still shows the icon, but not as a link, until a URL is added.",
+  "social": {
+    "instagram": "",
+    "facebook": "",
+    "youtube": ""
+  },
   "products": [
     {"id": "blinds", "name": "Custom Blinds"},
     {"id": "shades", "name": "Shades"},
