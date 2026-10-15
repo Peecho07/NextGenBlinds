@@ -21,9 +21,9 @@
     {"path": "/services/exterior-solar-shades/", "title": "Exterior Solar Shades", "type": "product", "status": "gated", "index": true, "phase": 3, "interest": "exterior-solar", "blocker": "Confirm a distinct exterior offering exists; otherwise merge into screens."},
     {"path": "/services/retractable-awnings/", "title": "Retractable Awnings", "type": "product", "status": "gated", "index": true, "phase": 3, "interest": "awnings", "blocker": "Confirm awnings are a real NextGen offering."},
 
-    {"path": "/portfolio-gallery/", "title": "Gallery", "type": "proof", "status": "gated", "index": true, "phase": 2, "blocker": "Needs rights-cleared install photos. Legacy URL, preserve."},
+    {"path": "/portfolio-gallery/", "title": "Portfolio", "type": "proof", "status": "built", "index": true, "phase": 2, "note": "Photos transferred from the previous site, see src/portfolio.json. Some are stock or manufacturer images, see owner-register.md. Legacy URL, preserve."},
     {"path": "/projects/[slug]/", "title": "Project Story", "type": "proof", "status": "gated", "index": true, "phase": 2, "blocker": "One page per documented, permissioned project only."},
-    {"path": "/about-us/", "title": "About", "type": "company", "status": "gated", "index": true, "phase": 2, "blocker": "Needs approved origin story, team photos, roles. Legacy URL, preserve."},
+    {"path": "/about-us/", "title": "About Us", "type": "company", "status": "built", "index": true, "phase": 2, "note": "Copy carried over from the previous site. Team photos and roles still to come. Legacy URL, preserve."},
     {"path": "/how-it-works/", "title": "Process", "type": "company", "status": "planned", "index": true, "phase": 2},
 
     {"path": "/service-areas/", "title": "Service Areas", "type": "location-hub", "status": "planned", "index": true, "phase": 2},
@@ -49,10 +49,12 @@
     {"path": "/lp/outdoor-screens/", "title": "Campaign: Outdoor Screens", "type": "campaign", "status": "gated", "index": false, "phase": 5, "blocker": "Requires outdoor offering confirmation and live lead delivery."}
   ],
   "nav": [
+    {"label": "Home", "path": "/"},
+    {"label": "Portfolio", "path": "/portfolio-gallery/"},
+    {"label": "About Us", "path": "/about-us/"},
     {"label": "Indoor Treatments", "path": "/indoor-window-treatments/", "children": ["/services/blinds/", "/services/shades/", "/services/motorized-shades/", "/services/plantation-shutters/", "/services/custom-drapery/", "/services/roller-solar-shades/", "/services/zebra-banded-shades/"]},
     {"label": "Outdoor Living", "path": "/outdoor-window-treatments/", "children": ["/services/outdoor-motorized-screens/", "/services/exterior-solar-shades/", "/services/retractable-awnings/"]},
-    {"label": "Our Work", "path": "/portfolio-gallery/"},
-    {"label": "Why NextGen", "path": "/about-us/", "children": ["/about-us/", "/how-it-works/"]},
+    {"label": "How It Works", "path": "/how-it-works/"},
     {"label": "Resources", "path": "/resources/", "children": ["/window-treatment-faqs/", "/resources/window-treatment-cost-guide/", "/resources/solar-shades-nighttime-privacy/"]},
     {"label": "Service Areas", "path": "/service-areas/"}
   ],

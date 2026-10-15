@@ -9,7 +9,8 @@ Everything here is either drafted from provisional inputs or blocked on somethin
 | Lead delivery live | Code done, not configured | Cloudflare KV namespace `LEADS`, Resend account + verified sending domain, `NOTIFY_TO` inbox. Then one controlled end-to-end test. |
 | Privacy policy | Draft | Owner + counsel review. Fill in providers, retention period, last-updated date. |
 | Logo | ASSET_REQUIRED | Approved logo file as SVG (or 2x PNG). Confirm spelling "NextGen Blinds" vs "Next Gen Blinds". |
-| Photography | ASSET_REQUIRED | Every `.media` slot uses an original illustration as a stand-in. Replace with rights-cleared NextGen install photos before public launch. |
+| Photography | Partly done | The 29 portfolio photos were transferred from the old site (`src/portfolio.json`), same categories. Hero, product cards, About, and Portfolio now use them. Before launch: (1) Plantation Shutters and Custom Drapery look like real NextGen installs, so confirm. (2) Kitchen ("Motorized"), dining room ("Faux Wood"), and all four Home Offices photos are licensed stock (Envato "-utc" filenames). Confirm the license covers this site, and don't present them as NextGen projects. (3) Files named `RS_AUTO_*`, `SHPOL_*`, `DS_*`, `ALTA_*` are manufacturer marketing images. Confirm dealer usage rights. (4) Mis-categorized on the old site and kept as-is: the "Faux Wood" dining photo shows banded/zebra shades, and the "Motorized" kitchen photo shows a pleated shade. Re-file if you want. The motorized photo is only 384px, so supply a larger one. |
+| About Us copy and hours | Carried over | Text, "Why Choose" list, and hours (Mon to Fri 9:30 to 5:30, Sat 10 to 5, Sun closed) come from the old About page. Confirm still accurate. The old site listed (561) 532-8091 in one heading. This site uses 561-332-8091 everywhere. |
 
 ## Business facts to confirm
 

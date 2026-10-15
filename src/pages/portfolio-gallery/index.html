@@ -1,0 +1,38 @@
+<!--
+{
+  "path": "/portfolio-gallery/",
+  "title": "Portfolio: Blinds, Shades, Shutters & Drapery | NextGen Blinds",
+  "description": "Browse NextGen Blinds window treatment photos by category: motorized shades, plantation shutters, solar and zebra shades, faux wood blinds, custom drapery, and home offices.",
+  "breadcrumbs": [["Home", "/"], ["Portfolio", "/portfolio-gallery/"]]
+}
+-->
+<section class="section tight" style="padding-top:var(--s3)" aria-labelledby="pf-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Our portfolio</span>
+      <h1 id="pf-h">Window Treatments Photo Gallery</h1>
+      <p class="lead">Browse by category to see the styles, colors, and finishes we work with. Pick a tab, then tap any photo to see it larger.</p>
+    </div>
+    <!-- OWNER_CONFIRM: several photos are stock or manufacturer images. Label or replace them before calling this a gallery of NextGen installs. See owner-register.md. -->
+    {{portfolioGallery}}
+  </div>
+</section>
+
+<section class="section bg-warm" aria-labelledby="pf-cta-h">
+  <div class="wrap split pf-cta">
+    <div>
+      <span class="eyebrow">See it at your windows</span>
+      <h2 id="pf-cta-h">Like a style you see here?</h2>
+      <p>Tell us which one caught your eye. We'll bring samples to your home so you can compare fabrics and finishes in your own light.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" id="pf-cta" href="/contact-us/">Request a Free Consultation</a>
+        <a class="btn btn-secondary" href="tel:{{phoneE164}}">Call {{phone}}</a>
+      </div>
+    </div>
+    <ul class="checks">
+      <li>Custom measured for each window</li>
+      <li>Motorized and smart-home options</li>
+      <li>Serving homes across {{serviceArea}}</li>
+    </ul>
+  </div>
+</section>

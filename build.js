@@ -13,6 +13,7 @@ const PREVIEW = process.argv.includes('--preview');
 const BASE = ((process.argv.find(a => a.startsWith('--base=')) || '').slice(7) || process.env.BASE_PATH || '').replace(/\/+$/, '');
 const site = JSON.parse(fs.readFileSync(path.join(SRC, 'site.json'), 'utf8'));
 const routes = JSON.parse(fs.readFileSync(path.join(SRC, 'routes.json'), 'utf8'));
+const portfolio = JSON.parse(fs.readFileSync(path.join(SRC, 'portfolio.json'), 'utf8'));
 const byPath = Object.fromEntries(routes.routes.map(r => [r.path, r]));
 const isBuilt = p => byPath[p] && byPath[p].status === 'built';
 
@@ -56,20 +57,52 @@ function mobileNavHtml() {
 }
 
 function footerProducts() {
-  const kids = routes.nav[0].children.concat(routes.nav[1].children).filter(isBuilt);
+  const kids = routes.nav.flatMap(n => n.children || []).filter(p => p.startsWith('/services/') && isBuilt(p));
   if (kids.length) return kids.map(k => `<li><a href="${k}">${esc(byPath[k].title)}</a></li>`).join('');
   // Until product pages exist, route product interest into the consultation form with context.
   return site.products.filter(p => !p.gated && p.id !== 'not-sure').map(p => `<li><a href="/contact-us/?interest=${p.id}">${esc(p.name)}</a></li>`).join('');
 }
 
 function footerCompany() {
-  const list = ['/about-us/', '/how-it-works/', '/portfolio-gallery/', '/service-areas/', '/window-treatment-faqs/', '/contact-us/'].filter(isBuilt);
+  const list = ['/portfolio-gallery/', '/about-us/', '/how-it-works/', '/service-areas/', '/window-treatment-faqs/', '/contact-us/'].filter(isBuilt);
   return list.map(p => `<li><a href="${p}">${esc(byPath[p].title)}</a></li>`).join('');
 }
 
 function footerLegal() {
   return ['/privacy-policy/', '/terms/', '/accessibility/'].filter(isBuilt)
     .map(p => `<a href="${p}">${esc(byPath[p].title)}</a>`).join(' · ');
+}
+
+// Portfolio: filter chips + photo grid. Works without JS (all photos shown, each links to the full image).
+const catBySlug = Object.fromEntries(portfolio.categories.map(c => [c.slug, c]));
+const pfSlug = item => item.file.split('/')[0];
+function pfTile(item, i) {
+  const c = catBySlug[pfSlug(item)];
+  return `<li class="pf-item" data-cat="${c.slug}"><a class="pf-link" href="/assets/img/portfolio/${item.file}" data-caption="${esc(c.name)}">` +
+    `<img src="/assets/img/portfolio/${item.file}" alt="${esc(item.alt)}" width="${item.w}" height="${item.h}" loading="${i < 6 ? 'eager' : 'lazy'}" decoding="async">` +
+    `<span class="pf-tag">${esc(c.name)}</span></a></li>`;
+}
+function portfolioGallery() {
+  const counts = {};
+  portfolio.items.forEach(it => { counts[pfSlug(it)] = (counts[pfSlug(it)] || 0) + 1; });
+  const chip = (slug, name, n, on) => `<button type="button" class="pf-chip" data-filter="${slug}" aria-pressed="${on}">${esc(name)} <span class="n">${n}</span></button>`;
+  const chips = [chip('all', 'All', portfolio.items.length, true)]
+    .concat(portfolio.categories.filter(c => counts[c.slug]).map(c => chip(c.slug, c.name, counts[c.slug], false))).join('');
+  return `<div class="pf-filters" role="group" aria-label="Filter photos by category">${chips}</div>` +
+    `<p class="sr-only" id="pf-status" aria-live="polite"></p>` +
+    `<ul class="pf-grid">${portfolio.items.map(pfTile).join('')}</ul>` +
+    `<dialog class="pf-lightbox" id="pf-lightbox" aria-label="Photo viewer"><figure><img alt=""><figcaption></figcaption></figure>` +
+    `<button type="button" class="pf-prev" aria-label="Previous photo">&#8249;</button><button type="button" class="pf-next" aria-label="Next photo">&#8250;</button>` +
+    `<button type="button" class="pf-close" aria-label="Close">&times;</button></dialog>`;
+}
+// Home page strip: one photo from each listed category, linking into the filtered gallery.
+function portfolioPreview() {
+  const picks = ['drapery/drapery-01.jpg', 'shutters/shutters-05.jpg', 'zebra/zebra-01.webp', 'faux-wood/faux-wood-02.webp'];
+  const link = isBuilt('/portfolio-gallery/') ? '/portfolio-gallery/' : '/contact-us/';
+  return `<ul class="pf-grid pf-preview">` + picks.map(f => {
+    const item = portfolio.items.find(it => it.file === f); const c = catBySlug[pfSlug(item)];
+    return `<li class="pf-item"><a class="pf-link" href="${link}?cat=${c.slug}"><img src="/assets/img/portfolio/${f}" alt="${esc(item.alt)}" width="${item.w}" height="${item.h}" loading="lazy" decoding="async"><span class="pf-tag">${esc(c.name)}</span></a></li>`;
+  }).join('') + `</ul>`;
 }
 
 function parsePage(file) {
@@ -160,7 +193,7 @@ for (const file of walk(path.join(SRC, 'pages'))) {
     draft: PREVIEW ? '<div class="draft-banner" role="note">Draft preview. Not for public release. Photos and some details are placeholders pending owner approval.</div>' : '',
     header: fill(header, { ...shared, nav: navHtml(meta.path), mobileNav: mobileNavHtml() }),
     crumbs: crumbs(meta),
-    main: fill(fill(body, { ...shared, leadForm: partial('lead-form') }), { ...shared, interestOptions }),
+    main: fill(fill(body, { ...shared, leadForm: partial('lead-form'), portfolioGallery: portfolioGallery(), portfolioPreview: portfolioPreview() }), { ...shared, interestOptions }),
     footer: fill(footer, { ...shared, footerProducts: footerProducts(), footerCompany: footerCompany(), footerLegal: footerLegal() }),
     bodyClass: meta.bodyClass || '',
     actionBar: meta.noActionBar ? '' : `<div class="action-bar" id="action-bar"><a class="btn btn-secondary" href="tel:${site.phoneE164}">Call</a><a class="btn btn-primary" href="/contact-us/">Free Consultation</a></div>`

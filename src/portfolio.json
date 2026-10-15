@@ -1,0 +1,43 @@
+{
+  "_note": "Portfolio gallery, transferred from nextgenblinds.com/portfolio-gallery/ with the same categories. Images live in src/assets/img/portfolio/<slug>/. Add a photo by dropping the file in its folder and adding an entry here. See owner-register.md: several images are stock or manufacturer photos, not NextGen installs.",
+  "categories": [
+    {"slug": "motorized", "name": "Motorized Blinds & Shades", "interest": "motorized-shades"},
+    {"slug": "shutters", "name": "Plantation Shutters", "interest": "shutters"},
+    {"slug": "solar-shades", "name": "Solar Shades", "interest": "roller-solar"},
+    {"slug": "zebra", "name": "Zebra Shades", "interest": "zebra"},
+    {"slug": "faux-wood", "name": "Faux Wood Blinds", "interest": "blinds"},
+    {"slug": "drapery", "name": "Custom Drapery", "interest": "drapery"},
+    {"slug": "home-offices", "name": "Home Offices", "interest": "not-sure"}
+  ],
+  "items": [
+    {"file": "motorized/motorized-01.jpg", "w": 1694, "h": 2560, "alt": "White pleated shade over a kitchen window above a sink with a brass faucet"},
+    {"file": "motorized/motorized-02.webp", "w": 384, "h": 384, "alt": "White motorized roller shade with a smart speaker and remote on the sill"},
+    {"file": "shutters/shutters-01.webp", "w": 384, "h": 384, "alt": "White plantation shutters in a bedroom"},
+    {"file": "shutters/shutters-02.jpg", "w": 480, "h": 640, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-03.jpg", "w": 480, "h": 640, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-04.jpg", "w": 640, "h": 480, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-05.jpg", "w": 480, "h": 640, "alt": "Three-panel white plantation shutters on a bedroom window, louvers tilted open"},
+    {"file": "shutters/shutters-06.jpg", "w": 640, "h": 480, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-07.jpg", "w": 640, "h": 480, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-08.jpg", "w": 640, "h": 480, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-09.jpg", "w": 480, "h": 640, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-10.jpg", "w": 480, "h": 640, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-11.jpg", "w": 480, "h": 640, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-12.jpg", "w": 480, "h": 640, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-13.jpg", "w": 1080, "h": 1920, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-14.jpg", "w": 480, "h": 640, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-15.jpg", "w": 480, "h": 640, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-16.jpg", "w": 640, "h": 480, "alt": "White plantation shutters, installed project photo"},
+    {"file": "shutters/shutters-17.jpg", "w": 640, "h": 480, "alt": "White plantation shutters, installed project photo"},
+    {"file": "solar-shades/solar-shades-01.webp", "w": 640, "h": 640, "alt": "Gray textured roller shade half lowered over a bedroom window"},
+    {"file": "zebra/zebra-01.webp", "w": 640, "h": 640, "alt": "Gray zebra shade with alternating sheer and solid bands"},
+    {"file": "faux-wood/faux-wood-01.jpg", "w": 2560, "h": 1920, "alt": "Brown banded shades over two large windows behind a glass dining table"},
+    {"file": "faux-wood/faux-wood-02.webp", "w": 640, "h": 640, "alt": "Close-up of warm wood-tone faux wood blinds"},
+    {"file": "drapery/drapery-01.jpg", "w": 640, "h": 480, "alt": "Floor-to-ceiling linen drapery panels framing living room windows"},
+    {"file": "drapery/drapery-02.jpg", "w": 640, "h": 480, "alt": "Custom drapery panels, installed project photo"},
+    {"file": "home-offices/home-offices-01.jpg", "w": 2560, "h": 1707, "alt": "Sunlit home office desk with a monitor beside a window"},
+    {"file": "home-offices/home-offices-02.jpg", "w": 2560, "h": 1708, "alt": "Light-colored shared children's bedroom with window treatments"},
+    {"file": "home-offices/home-offices-03.jpg", "w": 2560, "h": 1707, "alt": "Minimalist home office with a laptop and notebook near a window"},
+    {"file": "home-offices/home-offices-04.jpg", "w": 2560, "h": 1707, "alt": "Home office desk beside a window"}
+  ]
+}

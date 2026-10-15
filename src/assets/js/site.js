@@ -65,6 +65,53 @@
     else if (a.getAttribute('href') && a.getAttribute('href').indexOf('/contact-us/') !== -1) track('consultation_cta_click', { page: location.pathname });
   });
 
+  /* Portfolio: category filter chips + lightbox. Without JS every photo shows and links to the full image. */
+  var chips = document.querySelectorAll('.pf-chip');
+  if (chips.length) {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.pf-grid .pf-item'));
+    var pfStatus = document.getElementById('pf-status');
+    var pfCta = document.getElementById('pf-cta');
+    var interestFor = { motorized: 'motorized-shades', shutters: 'shutters', 'solar-shades': 'roller-solar', zebra: 'zebra', 'faux-wood': 'blinds', drapery: 'drapery' };
+    var applyFilter = function (cat, chip) {
+      chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === chip)); });
+      var shown = 0;
+      items.forEach(function (li) { var on = cat === 'all' || li.getAttribute('data-cat') === cat; li.hidden = !on; if (on) shown++; });
+      if (pfStatus) pfStatus.textContent = 'Showing ' + shown + ' photos' + (cat === 'all' ? '' : ' of ' + chip.firstChild.textContent.trim());
+      if (pfCta) pfCta.setAttribute('href', pfCta.getAttribute('href').split('?')[0] + (interestFor[cat] ? '?interest=' + interestFor[cat] : ''));
+    };
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var cat = c.getAttribute('data-filter');
+        applyFilter(cat, c);
+        try { history.replaceState(null, '', cat === 'all' ? location.pathname : '?cat=' + cat); } catch (e) {}
+      });
+    });
+    var startCat = new URLSearchParams(location.search).get('cat');
+    var startChip = startCat && document.querySelector('.pf-chip[data-filter="' + CSS.escape(startCat) + '"]');
+    if (startChip) applyFilter(startCat, startChip);
+
+    var box = document.getElementById('pf-lightbox');
+    if (box && typeof box.showModal === 'function') {
+      var boxImg = box.querySelector('img'), boxCap = box.querySelector('figcaption'), current = -1;
+      var visible = function () { return items.filter(function (li) { return !li.hidden; }); };
+      var show = function (li) {
+        var a = li.querySelector('a'), img = li.querySelector('img');
+        boxImg.src = a.href; boxImg.alt = img.alt;
+        boxCap.textContent = a.getAttribute('data-caption') + ': ' + img.alt;
+        current = visible().indexOf(li);
+      };
+      var step = function (d) { var v = visible(); if (v.length) show(v[(current + d + v.length) % v.length]); };
+      items.forEach(function (li) {
+        li.querySelector('a').addEventListener('click', function (e) { e.preventDefault(); show(li); box.showModal(); });
+      });
+      box.querySelector('.pf-close').addEventListener('click', function () { box.close(); });
+      box.querySelector('.pf-prev').addEventListener('click', function () { step(-1); });
+      box.querySelector('.pf-next').addEventListener('click', function () { step(1); });
+      box.addEventListener('click', function (e) { if (e.target === box) box.close(); });
+      box.addEventListener('keydown', function (e) { if (e.key === 'ArrowLeft') step(-1); else if (e.key === 'ArrowRight') step(1); });
+    }
+  }
+
   /* Lead form */
   var form = document.getElementById('lead-form');
   if (!form) return;
