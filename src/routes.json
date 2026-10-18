@@ -341,10 +341,6 @@
       "path": "/portfolio-gallery/"
     },
     {
-      "label": "About Us",
-      "path": "/about-us/"
-    },
-    {
       "label": "Indoor Treatments",
       "path": "/indoor-window-treatments/",
       "children": [
@@ -380,6 +376,11 @@
     {
       "label": "Service Areas",
       "path": "/service-areas/"
+    },
+    {
+      "label": "About Us",
+      "path": "/about-us/",
+      "_note": "Kept last so it always sits second-to-last, right before Contact (which build.js appends)."
     }
   ],
   "legacyRedirectCandidates": [

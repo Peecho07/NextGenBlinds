@@ -79,12 +79,23 @@
       if (pfStatus) pfStatus.textContent = 'Showing ' + shown + ' photos' + (cat === 'all' ? '' : ' of ' + chip.firstChild.textContent.trim());
       if (pfCta) pfCta.setAttribute('href', pfCta.getAttribute('href').split('?')[0] + (interestFor[cat] ? '?interest=' + interestFor[cat] : ''));
     };
+    var selectChip = function (c) {
+      if (c.getAttribute('aria-pressed') === 'true') return;
+      var cat = c.getAttribute('data-filter');
+      applyFilter(cat, c);
+      try { history.replaceState(null, '', cat === 'all' ? location.pathname : '?cat=' + cat); } catch (e) {}
+    };
+    // Mouse users switch tabs by hovering. A short delay stops tabs flickering as the pointer passes over them.
+    // Touch and keyboard still use tap/click.
+    var hoverTimer = null;
     chips.forEach(function (c) {
-      c.addEventListener('click', function () {
-        var cat = c.getAttribute('data-filter');
-        applyFilter(cat, c);
-        try { history.replaceState(null, '', cat === 'all' ? location.pathname : '?cat=' + cat); } catch (e) {}
+      c.addEventListener('click', function () { clearTimeout(hoverTimer); selectChip(c); });
+      c.addEventListener('pointerenter', function (e) {
+        if (e.pointerType !== 'mouse') return;
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(function () { selectChip(c); }, 120);
       });
+      c.addEventListener('pointerleave', function () { clearTimeout(hoverTimer); });
     });
     var startCat = new URLSearchParams(location.search).get('cat');
     var startChip = startCat && document.querySelector('.pf-chip[data-filter="' + CSS.escape(startCat) + '"]');
