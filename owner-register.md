@@ -46,3 +46,20 @@ Everything here is either drafted from provisional inputs or blocked on somethin
 - Canonical host: set to `https://www.nextgenblinds.com`. Confirm www vs non-www matches the current site.
 - Legacy URLs: before switching DNS, crawl the live site and export its URLs. Only then fill `_redirects`. The four prototype aliases in `routes.json` are candidates, not confirmed live URLs.
 - Fonts: loaded from Google Fonts. Can be self-hosted if you'd rather avoid the third-party request.
+
+## Update: Oct 18, 2026
+
+Confirmed by Anthony from the reference build (nextgen-blinds.vercel.app) and now live on the site:
+- Address: 4516 Eventing St, Lake Worth, FL 33467 (footer, contact page, schema)
+- Hours: Mon to Fri 8:00am to 6:00pm, Saturday by appointment
+- Callback: within one business day (form, contact, thank-you, product pages)
+- Installation by our own installers, never a subcontractor
+- Motors: Hunter Douglas PowerView, Somfy, and comparable; Alexa, Google Home, Apple HomeKit through a hub
+- Product line: blinds, motorized shades, shutters, drapery, roller and solar, zebra, outdoor motorized screens, retractable awnings
+
+Still open:
+- Stock photos on product pages are Pexels images, not NextGen jobs. Never caption them as "our work." Replace as real install photos come in.
+- Retractable Awnings needs a photo (currently an illustration).
+- Outdoor screens and awnings pages state they are not storm protection and should be retracted in high wind. Confirm wind sensors and permit handling.
+- Social profile URLs are still empty in `src/site.json`.
+- Lead delivery is not live on GitHub Pages (see README).

@@ -1,0 +1,370 @@
+[
+  {
+    "id": "blinds",
+    "group": "indoor",
+    "path": "/services/blinds/",
+    "photo": "blinds",
+    "name": "Custom Blinds",
+    "short": "Tilt the slats to aim light exactly where you want it. Faux wood holds up to Florida humidity.",
+    "title": "Custom Blinds in Palm Beach County | NextGen Blinds",
+    "description": "Custom faux wood and wood blinds for Palm Beach County homes, measured and installed by our own team. Request a free in-home consultation.",
+    "h1": "Custom Blinds in Palm Beach County",
+    "lead": "Tilt the slats to aim light exactly where you want it. Made to fit each window and installed by our own team.",
+    "goodFor": [
+      "Kitchens, bathrooms, and laundry rooms, with moisture-resistant faux wood",
+      "Bedrooms and offices where you want precise light control",
+      "A classic look at a practical price",
+      "Matching a wood-tone finish across a whole home"
+    ],
+    "know": [
+      [
+        "Faux wood vs. real wood",
+        "Faux wood resists warping in humidity and is easy to wipe clean. Real wood is lighter, which helps on wide windows."
+      ],
+      [
+        "Slat size",
+        "Wider slats give a more open view when tilted. Narrower slats suit smaller and shallower windows."
+      ],
+      [
+        "Cordless options",
+        "Cordless lift and wand tilt are available on many blinds, which is safer for homes with kids or pets."
+      ]
+    ],
+    "faq": [
+      [
+        "Are faux wood blinds good for Florida homes?",
+        "Yes. Faux wood handles heat and humidity well, which is why it is popular in kitchens, bathrooms, and sunny rooms."
+      ],
+      [
+        "Blinds or shutters?",
+        "Blinds raise all the way up and cost less. Shutters are fixed panels with a built-in look. We can show both at your windows."
+      ],
+      [
+        "Do blinds block all light?",
+        "Closed blinds block most light, but some comes through the slat holes and edges. For a darker room, we may suggest pairing them with drapery."
+      ]
+    ]
+  },
+  {
+    "id": "motorized-shades",
+    "group": "indoor",
+    "path": "/services/motorized-shades/",
+    "photo": "motorized-shades",
+    "name": "Motorized Shades",
+    "short": "Raise and lower shades with a remote, app, or schedule. Great for tall, wide, or hard-to-reach windows.",
+    "title": "Motorized Shades in Palm Beach County | NextGen Blinds",
+    "description": "Motorized shades for Palm Beach County homes. Control by remote, app, or schedule. Request a free in-home consultation to plan power and smart-home options.",
+    "h1": "Motorized Shades in Palm Beach County",
+    "lead": "Raise and lower shades with a remote, an app, or a schedule. Especially useful on tall glass, wide sliders, and windows you can't easily reach.",
+    "goodFor": [
+      "Tall, wide, or hard-to-reach windows",
+      "Rooms where the sun moves across the day, using schedules",
+      "Homes with young children or pets, since there are no cords",
+      "Seasonal residents who want to control shades from anywhere through a connected hub"
+    ],
+    "know": [
+      [
+        "Power",
+        "Rechargeable battery motors usually install without new wiring. Hardwired motors fit best in new construction or a remodel."
+      ],
+      [
+        "Smart-home control",
+        "We install Hunter Douglas PowerView, Somfy, and comparable motors. Many work with Alexa, Google Home, and Apple HomeKit through a hub. We confirm compatibility with your setup before you order."
+      ],
+      [
+        "Fabric still matters",
+        "Motorization changes how the shade moves, not how much light or privacy it gives. That comes from the fabric you choose."
+      ]
+    ],
+    "faq": [
+      [
+        "Do I need an electrician?",
+        "Often not. Battery-powered motors usually install without new wiring. If you're building or remodeling, a hardwired setup may make more sense, and we'll recommend based on your windows."
+      ],
+      [
+        "Can I add motors to shades later?",
+        "Sometimes, but many shades can't be converted. If you think you'll want motorization, mention it at the consultation so the right hardware is chosen up front."
+      ],
+      [
+        "What decides the price?",
+        "The number and size of shades, the fabric, the motor and power type, and whether you add a hub or sensors. Your written proposal breaks it down so you can compare options."
+      ]
+    ]
+  },
+  {
+    "id": "shutters",
+    "group": "indoor",
+    "path": "/services/plantation-shutters/",
+    "photo": "shutters",
+    "name": "Plantation Shutters",
+    "short": "A finished, built-in look with louvers you can tilt for light and privacy.",
+    "title": "Plantation Shutters in Palm Beach County | NextGen Blinds",
+    "description": "Custom interior plantation shutters for Palm Beach County homes, made to fit each window. Request a free in-home consultation to compare materials and louver sizes.",
+    "h1": "Plantation Shutters in Palm Beach County",
+    "lead": "A finished, built-in look with louvers you can tilt for light and privacy. Each shutter is made to fit its window.",
+    "goodFor": [
+      "Rooms where you want a permanent, architectural look",
+      "Privacy with adjustable light through the day",
+      "Bathrooms and kitchens, with moisture-resistant materials",
+      "Homeowners who want something durable and easy to wipe clean"
+    ],
+    "know": [
+      [
+        "Material",
+        "Wood and composite are the common choices. Composite generally handles humidity better, which matters in bathrooms and Florida homes."
+      ],
+      [
+        "Louver size",
+        "Larger louvers give a more open view when tilted. Smaller louvers suit smaller windows and a more traditional look."
+      ],
+      [
+        "Doors and sliders",
+        "Sliding doors usually need bypass or bifold panels, which depend on the space beside the door. We'll check this when we measure."
+      ]
+    ],
+    "faq": [
+      [
+        "How are shutters different from blinds?",
+        "Shutters are a fixed frame with hinged panels, so they read as part of the room. Blinds raise and lower. Shutters stay in place and you tilt the louvers or swing the panels open."
+      ],
+      [
+        "Do shutters block all light?",
+        "Closed shutters block most light, but small amounts can pass around the louvers and panel edges. For a very dark bedroom, we may suggest pairing them with drapery."
+      ],
+      [
+        "How long do custom shutters take?",
+        "Shutters are made to order, so there's a production period before installation. We'll give you the expected timing in your proposal."
+      ]
+    ]
+  },
+  {
+    "id": "drapery",
+    "group": "indoor",
+    "path": "/services/custom-drapery/",
+    "photo": "drapery",
+    "name": "Custom Drapery",
+    "short": "Fabric, fullness, and hardware chosen for your room. Layer over shades for day and evening.",
+    "title": "Custom Drapery in Palm Beach County | NextGen Blinds",
+    "description": "Custom drapery for Palm Beach County homes: fabric, lining, and hardware chosen for your room. Request a free in-home consultation to see fabrics in your light.",
+    "h1": "Custom Drapery in Palm Beach County",
+    "lead": "Fabric, fullness, and hardware chosen for your room, measured and hung to the right length. Layer over shades for daytime and evening.",
+    "goodFor": [
+      "Softening rooms with hard floors and lots of glass",
+      "Framing tall windows and making ceilings feel higher",
+      "Darker bedrooms, with a blackout lining",
+      "Layering over shades for separate day and night settings"
+    ],
+    "know": [
+      [
+        "Lining",
+        "Unlined, privacy, and blackout linings change how much light comes through. Lining also helps protect fabric from strong sun."
+      ],
+      [
+        "Sun exposure",
+        "Florida sun can fade some fabrics over time. We'll point out options that hold up better on bright, sun-facing windows."
+      ],
+      [
+        "Stack-back",
+        "Open drapery has to sit somewhere. Planning where panels stack keeps them from blocking the glass or the view."
+      ]
+    ],
+    "faq": [
+      [
+        "Can drapery go with shades I already have?",
+        "Usually, yes. Layering drapery over shades is common. We'll check that the hardware has room to clear your existing shades."
+      ],
+      [
+        "Sheers or lined panels?",
+        "Sheers soften light and keep some daytime view but give little privacy at night. Lined panels give privacy and more light control. Many rooms use both."
+      ],
+      [
+        "Can drapery be motorized?",
+        "Motorized tracks are available for large spans and hard-to-reach windows. We'll confirm options for your opening at the consultation."
+      ]
+    ]
+  },
+  {
+    "id": "roller-solar",
+    "group": "indoor",
+    "path": "/services/roller-solar-shades/",
+    "photo": "roller-solar",
+    "name": "Roller & Solar Shades",
+    "short": "Clean lines that cut glare and soften heat while keeping your view.",
+    "title": "Roller & Solar Shades in Palm Beach County | NextGen Blinds",
+    "description": "Roller and solar shades for Palm Beach County homes. Cut glare while keeping your view. Request a free in-home consultation to compare fabric openness.",
+    "h1": "Roller & Solar Shades in Palm Beach County",
+    "lead": "Clean, simple shades that cut glare and soften heat. The fabric decides how much view, light, and privacy you keep.",
+    "goodFor": [
+      "Glare on TVs, screens, and work areas",
+      "Keeping the view while taking the edge off bright sun",
+      "A minimal, modern look",
+      "Large windows, especially paired with motorization"
+    ],
+    "know": [
+      [
+        "Openness",
+        "Solar fabrics come in different openness levels. Tighter weaves block more glare and give less view. More open weaves keep more view."
+      ],
+      [
+        "Night privacy",
+        "Many solar fabrics let people see in at night when lights are on inside. If that matters, consider a tighter fabric or a second layer."
+      ],
+      [
+        "Room darkening",
+        "Roller shades also come in light-filtering and blackout fabrics, though some light can still pass around the edges."
+      ]
+    ],
+    "faq": [
+      [
+        "What's the difference between roller and solar shades?",
+        "Both roll up the same way. Solar shades use a woven screen fabric that cuts glare while keeping the view. Other roller fabrics range from light-filtering to blackout."
+      ],
+      [
+        "Do solar shades give privacy at night?",
+        "Often not fully. When it's dark outside and lights are on inside, people may be able to see in. We'll show options if nighttime privacy matters."
+      ],
+      [
+        "Can roller shades be motorized?",
+        "Yes, roller shades are one of the most common motorized products. See our motorized shades page for power and control options."
+      ]
+    ]
+  },
+  {
+    "id": "zebra",
+    "group": "indoor",
+    "path": "/services/zebra-banded-shades/",
+    "photo": "zebra",
+    "name": "Zebra & Banded Shades",
+    "short": "Alternating sheer and solid bands. Offset them for light, line them up for privacy.",
+    "title": "Zebra & Banded Shades in Palm Beach County | NextGen Blinds",
+    "description": "Zebra and banded shades for Palm Beach County homes. Shift between filtered light and privacy in one shade. Request a free in-home consultation.",
+    "h1": "Zebra & Banded Shades in Palm Beach County",
+    "lead": "Two layers of alternating sheer and solid bands. Offset them for filtered light, or line them up for more privacy, all in one shade.",
+    "goodFor": [
+      "Rooms that need daylight and privacy at different times",
+      "One shade instead of layering two products",
+      "A modern, tailored look",
+      "Bedrooms and living spaces that face the street"
+    ],
+    "know": [
+      [
+        "Privacy, not blackout",
+        "Lining up the solid bands gives privacy, but small amounts of light still pass along the band edges."
+      ],
+      [
+        "Fabric choice",
+        "Band width and fabric weight change the look and how much light comes through. We'll bring samples to compare."
+      ],
+      [
+        "Operation",
+        "Cordless and motorized versions are available on many models, which helps in homes with kids or pets."
+      ]
+    ],
+    "faq": [
+      [
+        "How are zebra shades different from roller shades?",
+        "A roller shade is one layer of fabric. A zebra shade has two layers of banded fabric that slide past each other, so you can adjust light without raising the shade."
+      ],
+      [
+        "Are zebra shades blackout?",
+        "Usually not. They're best for privacy and light control. For a very dark room, a blackout roller or lined drapery works better."
+      ],
+      [
+        "Do they work on large windows?",
+        "Yes, within the size limits of the product. Very wide openings may be split into more than one shade. We'll confirm when we measure."
+      ]
+    ]
+  },
+  {
+    "id": "outdoor-screens",
+    "group": "outdoor",
+    "path": "/services/outdoor-motorized-screens/",
+    "photo": "outdoor-screens",
+    "name": "Outdoor Motorized Screens",
+    "short": "Drop-down screens for sun, bugs, and privacy on patios and lanais.",
+    "title": "Outdoor Motorized Screens in Palm Beach County | NextGen Blinds",
+    "description": "Outdoor motorized screens for Palm Beach County patios and lanais. Help with sun, bugs, and privacy. Request a free consultation to plan your space.",
+    "h1": "Outdoor Motorized Screens in Palm Beach County",
+    "lead": "Drop-down screens that help with sun, bugs, and privacy on patios and lanais, then roll away when you don't need them.",
+    "goodFor": [
+      "Patios that get strong afternoon sun",
+      "Keeping bugs out of an open-air space",
+      "Privacy from neighbors or the street",
+      "Turning a patio into a room you use more often"
+    ],
+    "know": [
+      [
+        "Not storm protection",
+        "Screens are not hurricane or impact protection. They should be raised in high winds and storms."
+      ],
+      [
+        "Edge tracks",
+        "Track systems hold the screen edges in place, which helps with bugs and wind. The right system depends on your opening."
+      ],
+      [
+        "Power and approvals",
+        "Motorized screens need power near the opening. Some communities and HOAs have rules about exterior changes."
+      ]
+    ],
+    "faq": [
+      [
+        "Are outdoor screens hurricane protection?",
+        "No. They're for sun, bugs, and privacy. Raise them before high winds or a storm, and use rated storm protection for that job."
+      ],
+      [
+        "Do they keep bugs out?",
+        "Screens with edge tracks seal the sides much better than free-hanging ones. We'll check the opening to see what will fit."
+      ],
+      [
+        "Do I need an electrician?",
+        "Motorized screens need a power source near the opening. If there isn't one, an electrician may need to add it. We'll flag this at the consultation."
+      ]
+    ]
+  },
+  {
+    "id": "awnings",
+    "group": "outdoor",
+    "path": "/services/retractable-awnings/",
+    "photo": "awnings",
+    "name": "Retractable Awnings",
+    "short": "Shade the patio when you want it, retract it when you don't.",
+    "title": "Retractable Awnings in Palm Beach County | NextGen Blinds",
+    "description": "Retractable awnings for Palm Beach County patios and decks. Shade on demand. Request a free consultation to check mounting and space.",
+    "h1": "Retractable Awnings in Palm Beach County",
+    "lead": "Shade on demand for patios and decks. Extend it when you want shade, and retract it when you want sun or when the weather turns.",
+    "goodFor": [
+      "Open patios and decks without a roof",
+      "Cutting heat through nearby windows and doors",
+      "Flexible shade instead of a permanent structure",
+      "Outdoor dining and lounge areas"
+    ],
+    "know": [
+      [
+        "Weather",
+        "Retract the awning in high wind and storms. Some models offer wind sensors that retract automatically."
+      ],
+      [
+        "Mounting",
+        "The wall or roofline has to support the awning. We'll check the mounting surface and the space it needs to extend."
+      ],
+      [
+        "Approvals",
+        "Some communities and HOAs require approval for exterior changes. It's worth checking before you order."
+      ]
+    ],
+    "faq": [
+      [
+        "Can a retractable awning stay out in the rain?",
+        "Light rain is usually fine for short periods if the awning is pitched to shed water. Retract it in heavy rain, wind, and storms."
+      ],
+      [
+        "Manual or motorized?",
+        "Both exist. Motorized awnings are easier to use daily and can add sensors. We'll recommend based on size and how often you'll use it."
+      ],
+      [
+        "How far can an awning extend?",
+        "It depends on the model and the wall it mounts to. We'll measure and show you how much shade the space can get."
+      ]
+    ]
+  }
+]

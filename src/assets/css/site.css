@@ -125,6 +125,37 @@ a:hover{color:var(--blue-dk)}
 }
 @media (max-width:560px){.hero .btn-row .btn{width:100%}}
 
+/* Photos: neutral fill shows while loading or if a photo is missing */
+.media,.hero-media{background:var(--warm-2)}
+.family.featured{grid-column:span 2}
+.family.featured .media{aspect-ratio:16/8.2}
+@media (max-width:960px){.family.featured{grid-column:span 2}}
+@media (max-width:640px){.family.featured{grid-column:auto}.family.featured .media{aspect-ratio:16/10}}
+.families.two{grid-template-columns:1fr 1fr}
+@media (max-width:640px){.families.two{grid-template-columns:1fr}}
+.group-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:var(--s5) 0 var(--s3)}
+.group-head:first-of-type{margin-top:0}
+.group-head h3{margin:0;font-size:22px}
+.photo-band{position:relative;min-height:420px;display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+.photo-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo-band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,43,58,0) 20%,rgba(23,43,58,.82) 100%)}
+.photo-band .wrap{position:relative;z-index:1;padding-top:var(--s6);padding-bottom:var(--s5);width:100%}
+.photo-band h2{color:#fff;max-width:640px}
+.photo-band p{max-width:560px;color:#E7EEF4}
+.sub-toggle-label{display:inline-flex;align-items:center;gap:6px;margin-left:0;padding:0 10px;font:700 15px var(--sans)}
+.sub-toggle-label.is-current{color:var(--blue)}
+.know{margin:0;display:grid;gap:var(--s3)}
+.know dt{font-weight:800;color:var(--ink);margin-bottom:4px}
+.know dd{margin:0;color:var(--muted)}
+.h3-like{font-size:26px}
+.split-text{align-items:start}
+.steps.steps-stack{grid-template-columns:1fr;gap:var(--s3)}
+.steps.steps-stack li{display:grid;grid-template-columns:56px 1fr;column-gap:16px;padding-top:var(--s2)}
+.steps.steps-stack li::before{grid-row:span 2;margin:0}
+.steps.steps-stack h3{margin-bottom:4px}
+.steps.steps-stack p{margin:0}
+.product-hero .hero-media{aspect-ratio:4/3.2}
+
 /* Illustrations stand in for photography in the draft. Every one is tagged data-asset="ASSET_REQUIRED". */
 .media,.hero-media{position:relative;overflow:hidden}
 .media img,.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -359,3 +390,12 @@ fieldset.field{border:0;margin:0 0 var(--s3);padding:0;min-width:0}
   .pf-chip{justify-content:center;width:100%;white-space:nowrap}
 }
 @media (min-width:641px) and (max-width:1000px){.pf-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Header fit with the longer menu: keep the CTA on one line, drop the header phone first (it stays in the utility bar). */
+.hdr-actions .btn{white-space:nowrap}
+@media (max-width:1380px){.hdr-phone{display:none}}
+@media (max-width:1180px){.nav a.top,.nav .top{padding:0 7px;font-size:14.5px}.site-header .wrap{gap:16px}}
+@media (max-width:1060px){.hdr-actions .btn{padding:12px 16px;font-size:15px}}
+.site-header .brand img{max-width:none;width:auto;height:46px}
+@media (max-width:1180px){.site-header .brand img{height:40px}}
+.nav a.top,.nav .top{white-space:nowrap}
+@media (max-width:1120px){.nav{display:none}.menu-btn{display:inline-flex}.site-header .wrap{grid-template-columns:1fr auto}}

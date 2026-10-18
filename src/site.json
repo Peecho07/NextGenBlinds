@@ -14,17 +14,68 @@
     "facebook": "",
     "youtube": ""
   },
-  "products": [
-    {"id": "blinds", "name": "Custom Blinds"},
-    {"id": "shades", "name": "Shades"},
-    {"id": "motorized-shades", "name": "Motorized Shades"},
-    {"id": "shutters", "name": "Plantation Shutters"},
-    {"id": "drapery", "name": "Custom Drapery"},
-    {"id": "roller-solar", "name": "Roller & Solar Shades"},
-    {"id": "zebra", "name": "Zebra & Banded Shades"},
-    {"id": "outdoor-screens", "name": "Outdoor Motorized Screens", "gated": true},
-    {"id": "exterior-solar", "name": "Exterior Solar Shades", "gated": true},
-    {"id": "awnings", "name": "Retractable Awnings", "gated": true},
-    {"id": "not-sure", "name": "Not sure yet"}
-  ]
+  "address": {
+    "street": "4516 Eventing St",
+    "city": "Lake Worth",
+    "region": "FL",
+    "zip": "33467",
+    "full": "4516 Eventing St, Lake Worth, FL 33467"
+  },
+  "hours": {
+    "text": "Mon to Fri 8:00am to 6:00pm, Saturday by appointment"
+  },
+  "responseTime": "within one business day",
+  "_photos_note": "Stock photos from Pexels (free commercial license), taken from the reference build at nextgen-blinds.vercel.app. Run tools/fetch-images.sh to self-host them; until then pages load them from the Pexels CDN. Replace with real NextGen installs when available. Do not caption stock photos as NextGen projects.",
+  "photos": {
+    "hero": {
+      "pexels": 36710315,
+      "alt": "Double-height living room with floor-to-ceiling sliding glass opening onto a pool"
+    },
+    "evening-drapery": {
+      "pexels": 8135529,
+      "alt": "Bedroom with gold drapery panels over sheers, lit warmly in the evening"
+    },
+    "measuring": {
+      "pexels": 5691534,
+      "alt": "Hands measuring a white window frame with a metal rule"
+    },
+    "villa-dusk": {
+      "pexels": 27195984,
+      "alt": "Modern wood and glass home with a pool and outdoor lounge at dusk"
+    },
+    "motorized-shades": {
+      "pexels": 6444253,
+      "alt": "Roller shades half-lowered across floor-to-ceiling windows in a modern room"
+    },
+    "shutters": {
+      "pexels": 2682318,
+      "alt": "White plantation shutters across a wide interior window"
+    },
+    "drapery": {
+      "pexels": 7546217,
+      "alt": "Floor-to-ceiling sheers layered under banded drapery panels in a living room"
+    },
+    "roller-solar": {
+      "pexels": 6980665,
+      "alt": "Daylight filtering through a white shade in a minimal room"
+    },
+    "zebra": {
+      "pexels": 9270061,
+      "alt": "Close-up of a grey zebra banded roller shade"
+    },
+    "outdoor-screens": {
+      "pexels": 5563471,
+      "alt": "Covered patio with pergola shade beside a pool"
+    },
+    "awnings": {
+      "art": "awning",
+      "alt": "Illustration of a retractable awning extended over a patio"
+    },
+    "blinds": {
+      "local": "/assets/img/portfolio/faux-wood/faux-wood-02.webp",
+      "alt": "Close-up of warm wood-tone faux wood blinds",
+      "w": 640,
+      "h": 640
+    }
+  }
 }

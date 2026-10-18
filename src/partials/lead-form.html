@@ -1,6 +1,6 @@
 <div class="form-card">
   <h3 id="form-title">Request a free consultation</h3>
-  <p class="sub">Four quick details. We'll contact you to schedule a time that works. This is a request, not a booked appointment.</p>
+  <p class="sub">Four quick details. We'll call within one business day to schedule a time that works. This is a request, not a booked appointment.</p>
   <div class="form-summary" id="form-summary" tabindex="-1" role="alert"></div>
   <form id="lead-form" action="/api/lead" method="post" novalidate aria-labelledby="form-title" data-phone="{{phone}}" data-phone-e164="{{phoneE164}}">
     <div class="field">
@@ -32,7 +32,7 @@
       <input id="f-email" name="email" type="email" autocomplete="email" maxlength="120">
       <p class="error" aria-live="polite"></p>
     </div>
-    <details class="optional-details" id="optional-details">
+    <details class="optional-details" id="optional-details"{{detailsOpen}}>
       <summary>Add project details (optional)</summary>
       <div class="inner">
         <div class="field">
