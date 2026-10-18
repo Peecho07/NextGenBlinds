@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Static build: assembles src/pages/**.html fragments into full pages with the shared shell.
+// Static build: assembles src/pages/**.html fragments and generated product pages into full pages.
 // Usage: node build.js            -> production build into dist/
 //        node build.js --preview  -> same, plus a visible "draft preview" banner and noindex everywhere
 const fs = require('fs');
@@ -13,8 +13,10 @@ const PREVIEW = process.argv.includes('--preview');
 const BASE = ((process.argv.find(a => a.startsWith('--base=')) || '').slice(7) || process.env.BASE_PATH || '').replace(/\/+$/, '');
 const site = JSON.parse(fs.readFileSync(path.join(SRC, 'site.json'), 'utf8'));
 const routes = JSON.parse(fs.readFileSync(path.join(SRC, 'routes.json'), 'utf8'));
+const products = JSON.parse(fs.readFileSync(path.join(SRC, 'products.json'), 'utf8'));
 const portfolio = JSON.parse(fs.readFileSync(path.join(SRC, 'portfolio.json'), 'utf8'));
 const byPath = Object.fromEntries(routes.routes.map(r => [r.path, r]));
+const productById = Object.fromEntries(products.map(p => [p.id, p]));
 const isBuilt = p => byPath[p] && byPath[p].status === 'built';
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -22,6 +24,24 @@ const read = f => fs.readFileSync(f, 'utf8');
 const partial = n => read(path.join(SRC, 'partials', n + '.html'));
 const chevron = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 
+// ---------- Photos ----------
+// Self-hosted copy wins if tools/fetch-images.sh has downloaded it; otherwise load from the Pexels CDN.
+const PHOTO_DIR = path.join(SRC, 'assets', 'img', 'photos');
+const WIDTHS = [640, 1024, 1600];
+function photo(key, { eager = false, sizes = '(max-width: 900px) 100vw, 50vw', decorative = false } = {}) {
+  const p = site.photos[key];
+  if (!p) throw new Error('Unknown photo key: ' + key);
+  const alt = decorative ? '' : esc(p.alt);
+  const load = eager ? 'fetchpriority="high"' : 'loading="lazy"';
+  if (p.art) return `<img src="/assets/img/art/${p.art}.svg" alt="${alt}" width="800" height="500" ${load} data-asset="ASSET_REQUIRED: real photo">`;
+  if (p.local) return `<img src="${p.local}" alt="${alt}" width="${p.w}" height="${p.h}" ${load} decoding="async">`;
+  const local = WIDTHS.every(w => fs.existsSync(path.join(PHOTO_DIR, `${key}-${w}.jpg`)));
+  const url = w => local ? `/assets/img/photos/${key}-${w}.jpg`
+    : `https://images.pexels.com/photos/${p.pexels}/pexels-photo-${p.pexels}.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=${w}`;
+  return `<img src="${url(1024)}" srcset="${WIDTHS.map(w => `${url(w)} ${w}w`).join(', ')}" sizes="${sizes}" alt="${alt}" width="1600" height="1067" ${load} decoding="async">`;
+}
+
+// ---------- Navigation ----------
 function navHtml(current) {
   const items = [];
   routes.nav.forEach((item, i) => {
@@ -29,13 +49,15 @@ function navHtml(current) {
     const parentLive = isBuilt(item.path);
     if (!parentLive && !kids.length) return;
     const cur = current === item.path ? ' aria-current="page"' : '';
-    const label = parentLive
-      ? `<a class="top" href="${item.path}"${cur}>${esc(item.label)}</a>`
-      : `<span class="top">${esc(item.label)}</span>`;
-    if (!kids.length) { items.push(`<li>${label}</li>`); return; }
+    if (!kids.length) { items.push(`<li><a class="top" href="${item.path}"${cur}>${esc(item.label)}</a></li>`); return; }
     const id = 'sub-' + i;
+    const inSection = kids.includes(current) ? ' is-current' : '';
     const links = kids.map(k => `<li><a href="${k}"${current === k ? ' aria-current="page"' : ''}>${esc(byPath[k].title)}</a></li>`).join('');
-    items.push(`<li class="nav-item">${label}<button class="sub-toggle" type="button" aria-expanded="false" aria-controls="${id}"><span class="sr-only">Show ${esc(item.label)} pages</span>${chevron}</button><ul class="submenu" id="${id}">${links}</ul></li>`);
+    // With a parent page: link + separate chevron button. Without one: a single button that opens the menu.
+    const control = parentLive
+      ? `<a class="top" href="${item.path}"${cur}>${esc(item.label)}</a><button class="sub-toggle" type="button" aria-expanded="false" aria-controls="${id}"><span class="sr-only">Show ${esc(item.label)} pages</span>${chevron}</button>`
+      : `<button class="sub-toggle sub-toggle-label top${inSection}" type="button" aria-expanded="false" aria-controls="${id}">${esc(item.label)}${chevron}</button>`;
+    items.push(`<li class="nav-item">${control}<ul class="submenu" id="${id}">${links}</ul></li>`);
   });
   items.push(`<li><a class="top" href="/contact-us/"${current === '/contact-us/' ? ' aria-current="page"' : ''}>Contact</a></li>`);
   return items.join('');
@@ -57,15 +79,11 @@ function mobileNavHtml() {
 }
 
 function footerProducts() {
-  const kids = routes.nav.flatMap(n => n.children || []).filter(p => p.startsWith('/services/') && isBuilt(p));
-  if (kids.length) return kids.map(k => `<li><a href="${k}">${esc(byPath[k].title)}</a></li>`).join('');
-  // Until product pages exist, route product interest into the consultation form with context.
-  return site.products.filter(p => !p.gated && p.id !== 'not-sure').map(p => `<li><a href="/contact-us/?interest=${p.id}">${esc(p.name)}</a></li>`).join('');
+  return products.filter(p => isBuilt(p.path)).map(p => `<li><a href="${p.path}">${esc(p.name)}</a></li>`).join('');
 }
-
 function footerCompany() {
-  const list = ['/portfolio-gallery/', '/about-us/', '/how-it-works/', '/service-areas/', '/window-treatment-faqs/', '/contact-us/'].filter(isBuilt);
-  return list.map(p => `<li><a href="${p}">${esc(byPath[p].title)}</a></li>`).join('');
+  return ['/portfolio-gallery/', '/about-us/', '/how-it-works/', '/service-areas/', '/window-treatment-faqs/', '/contact-us/'].filter(isBuilt)
+    .map(p => `<li><a href="${p}">${esc(byPath[p].title)}</a></li>`).join('');
 }
 
 // Social icons. A platform with no URL in site.json still shows its icon, as plain text instead of a link.
@@ -82,11 +100,6 @@ function socialHtml() {
       ? `<li><a href="${esc(s[k])}" target="_blank" rel="noopener" aria-label="${site.name} on ${label}">${svg}</a></li>`
       : `<li><span title="${label} link coming soon" aria-label="${label} (link coming soon)" role="img">${svg}</span></li>`;
   }).join('') + '</ul>';
-}
-
-function footerLegal() {
-  return ['/privacy-policy/', '/terms/', '/accessibility/'].filter(isBuilt)
-    .map(p => `<a href="${p}">${esc(byPath[p].title)}</a>`).join(' · ');
 }
 
 // Portfolio: filter chips + photo grid. Works without JS (all photos shown, each links to the full image).
@@ -122,6 +135,46 @@ function portfolioPreview() {
 }
 
 const assetVersion = p => require('crypto').createHash('sha1').update(fs.readFileSync(path.join(SRC, p))).digest('hex').slice(0, 8);
+function footerLegal() {
+  return ['/privacy-policy/', '/terms/', '/accessibility/'].filter(isBuilt)
+    .map(p => `<a href="${p}">${esc(byPath[p].title)}</a>`).join(' · ');
+}
+
+// ---------- Components ----------
+const productHref = p => isBuilt(p.path) ? p.path : `/contact-us/?interest=${p.id}`;
+
+function productCard(p, { featured = false } = {}) {
+  return `<a class="family${featured ? ' featured' : ''}" href="${productHref(p)}">
+  <div class="media">${photo(p.photo, { decorative: true, sizes: featured ? '(max-width: 960px) 100vw, 66vw' : '(max-width: 640px) 100vw, (max-width: 960px) 50vw, 33vw' })}</div>
+  <div class="body"><h3>${esc(p.name)}</h3><p>${esc(p.short)}</p><span class="link-arrow">Explore ${esc(p.name.toLowerCase())}</span></div>
+</a>`;
+}
+function cards(group, featureFirst) {
+  return products.filter(p => p.group === group).map((p, i) => productCard(p, { featured: featureFirst && i === 0 })).join('\n');
+}
+
+function interestOptions(selected) {
+  return products.map(p => `<option value="${p.id}"${p.id === selected ? ' selected' : ''}>${esc(p.name)}</option>`).join('');
+}
+
+function leadForm(selected) {
+  return partial('lead-form')
+    .replace('{{interestOptions}}', interestOptions(selected))
+    .replace('{{detailsOpen}}', selected ? ' open' : '');
+}
+
+function faqHtml(list) {
+  return list.map(([q, a]) => `<details><summary>${esc(q)}</summary><div class="ans"><p>${esc(a)}</p></div></details>`).join('\n');
+}
+
+// ---------- Templating ----------
+function fill(tpl, vars) {
+  return tpl
+    .replace(/\{\{photo:([\w-]+)(\|eager)?\}\}/g, (_, k, e) => photo(k, { eager: !!e, decorative: false }))
+    .replace(/\{\{cards:(\w+)(\|featured)?\}\}/g, (_, g, f) => cards(g, !!f))
+    .replace(/\{\{product:([\w-]+)\}\}/g, (_, id) => productHref(productById[id]))
+    .replace(/\{\{(\w+)\}\}/g, (_, k) => (k in vars ? vars[k] : `{{${k}}}`));
+}
 
 function parsePage(file) {
   const raw = read(file);
@@ -130,29 +183,27 @@ function parsePage(file) {
   return { meta: JSON.parse(m[1]), body: raw.slice(m[0].length) };
 }
 
-function fill(tpl, vars) {
-  return tpl
-    // {{href:/services/blinds/|blinds}} links to the page once it is built, otherwise to the form with product context.
-    .replace(/\{\{href:([^|}]+)\|([^}]+)\}\}/g, (_, p, interest) => isBuilt(p) ? p : `/contact-us/?interest=${interest}`)
-    .replace(/\{\{(\w+)\}\}/g, (_, k) => (k in vars ? vars[k] : `{{${k}}}`));
-}
-const interestOptions = site.products.filter(p => !p.gated && p.id !== 'not-sure')
-  .map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('');
-
 function ldjson(meta) {
   const blocks = [];
   if (meta.path === '/') {
-    blocks.push({
-      '@context': 'https://schema.org', '@type': 'HomeAndConstructionBusiness',
-      name: site.name, url: site.origin + '/', telephone: site.phoneE164, email: site.email,
-      areaServed: { '@type': 'AdministrativeArea', name: site.serviceArea }
-    });
+    const a = site.address;
+    blocks.push({ '@context': 'https://schema.org', '@type': 'HomeAndConstructionBusiness', name: site.name, url: site.origin + '/',
+      telephone: site.phoneE164, email: site.email, areaServed: { '@type': 'AdministrativeArea', name: site.serviceArea },
+      address: { '@type': 'PostalAddress', streetAddress: a.street, addressLocality: a.city, addressRegion: a.region, postalCode: a.zip, addressCountry: 'US' },
+      openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '18:00' }] });
+  }
+  if (meta.service) {
+    blocks.push({ '@context': 'https://schema.org', '@type': 'Service', name: meta.service, serviceType: meta.service,
+      provider: { '@type': 'HomeAndConstructionBusiness', name: site.name, url: site.origin + '/', telephone: site.phoneE164 },
+      areaServed: { '@type': 'AdministrativeArea', name: site.serviceArea }, url: site.origin + meta.path });
+  }
+  if (meta.faq) {
+    blocks.push({ '@context': 'https://schema.org', '@type': 'FAQPage',
+      mainEntity: meta.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
   }
   if (meta.breadcrumbs) {
-    blocks.push({
-      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-      itemListElement: meta.breadcrumbs.map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b[0], item: site.origin + b[1] }))
-    });
+    blocks.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+      itemListElement: meta.breadcrumbs.map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b[0], item: site.origin + b[1] })) });
   }
   return blocks.map(b => `<script type="application/ld+json">${JSON.stringify(b)}</script>`).join('\n');
 }
@@ -161,15 +212,33 @@ function crumbs(meta) {
   if (!meta.breadcrumbs) return '';
   const li = meta.breadcrumbs.map((b, i, a) => i === a.length - 1
     ? `<li><span aria-current="page">${esc(b[0])}</span></li>`
-    : `<li><a href="${b[1]}">${esc(b[0])}</a></li>`).join('');
+    : `<li>${b[1] ? `<a href="${b[1]}">${esc(b[0])}</a>` : esc(b[0])}</li>`).join('');
   return `<nav class="crumbs wrap" aria-label="Breadcrumb"><ol>${li}</ol></nav>`;
 }
 
-function outPath(p) {
-  if (p.endsWith('.html')) return path.join(DIST, p);
-  return path.join(DIST, p, 'index.html');
+// ---------- Product pages (generated) ----------
+function productPage(p) {
+  const related = products.filter(o => o.id !== p.id && (o.group === p.group || o.id === 'motorized-shades')).slice(0, 3);
+  const body = fill(partial('product'), {
+    groupLabel: p.group === 'outdoor' ? 'Outdoor living' : 'Indoor window treatments',
+    h1: esc(p.h1), lead: esc(p.lead), name: esc(p.name), nameLower: esc(p.name.toLowerCase()),
+    heroPhoto: photo(p.photo, { eager: true }),
+    measurePhoto: photo('measuring'),
+    goodFor: p.goodFor.map(g => `<li>${esc(g)}</li>`).join(''),
+    know: p.know.map(([t, d]) => `<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join(''),
+    faq: faqHtml(p.faq),
+    related: related.map(o => productCard(o)).join('\n'),
+    leadForm: leadForm(p.id)
+  });
+  return {
+    meta: { path: p.path, title: p.title, description: p.description, service: p.name, faq: p.faq,
+      breadcrumbs: [['Home', '/'], [p.group === 'outdoor' ? 'Outdoor Living' : 'Indoor Treatments', ''], [p.name, p.path]] },
+    body
+  };
 }
 
+// ---------- Build ----------
+function outPath(p) { return p.endsWith('.html') ? path.join(DIST, p) : path.join(DIST, p, 'index.html'); }
 function copyDir(from, to) {
   fs.mkdirSync(to, { recursive: true });
   for (const e of fs.readdirSync(from, { withFileTypes: true })) {
@@ -177,68 +246,59 @@ function copyDir(from, to) {
     e.isDirectory() ? copyDir(a, b) : fs.copyFileSync(a, b);
   }
 }
-
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap(e =>
     e.isDirectory() ? walk(path.join(dir, e.name)) : e.name.endsWith('.html') ? [path.join(dir, e.name)] : []);
 }
 
-// Build
 fs.rmSync(DIST, { recursive: true, force: true });
 copyDir(path.join(SRC, 'assets'), path.join(DIST, 'assets'));
-const layout = partial('layout');
-const header = partial('header');
-const footer = partial('footer');
+const layout = partial('layout'), header = partial('header'), footer = partial('footer');
+const pages = walk(path.join(SRC, 'pages')).map(parsePage).concat(products.map(productPage));
 const built = [];
 
-for (const file of walk(path.join(SRC, 'pages'))) {
-  const { meta, body } = parsePage(file);
+for (const { meta, body } of pages) {
   const r = byPath[meta.path];
   if (!r) throw new Error(`Page ${meta.path} is not in routes.json`);
   if (r.status !== 'built') { console.log('skip (not marked built):', meta.path); continue; }
   const index = r.index && !PREVIEW;
-  const shared = {
-    phone: site.phone, phoneE164: site.phoneE164, email: site.email, name: site.name,
+  const shared = { phone: site.phone, phoneE164: site.phoneE164, email: site.email, name: site.name,
     serviceArea: site.serviceArea, year: String(new Date().getFullYear()), legalName: site.legalNameApproved ? ' · ' + esc(site.legalName) : '',
-    social: socialHtml()
-  };
+    social: socialHtml(), address: esc(site.address.full), hours: esc(site.hours.text) };
+  const main = fill(body, { ...shared, leadForm: leadForm(null), portfolioGallery: portfolioGallery(), portfolioPreview: portfolioPreview() });
   let html = fill(layout, {
-    title: esc(meta.title),
-    description: esc(meta.description || ''),
+    title: esc(meta.title), description: esc(meta.description || ''),
     canonical: meta.path === '/404.html' ? '' : `<link rel="canonical" href="${site.origin}${meta.path}">`,
     robots: index ? 'index,follow' : 'noindex,follow',
     og: `<meta property="og:type" content="website"><meta property="og:site_name" content="${esc(site.name)}"><meta property="og:title" content="${esc(meta.title)}"><meta property="og:description" content="${esc(meta.description || '')}"><meta property="og:url" content="${site.origin}${meta.path}">`,
     ldjson: ldjson(meta),
-    draft: PREVIEW ? '<div class="draft-banner" role="note">Draft preview. Not for public release. Photos and some details are placeholders pending owner approval.</div>' : '',
+    draft: PREVIEW ? '<div class="draft-banner" role="note">Draft preview. Not for public release. Stock photos and some details are placeholders pending owner approval.</div>' : '',
     header: fill(header, { ...shared, nav: navHtml(meta.path), mobileNav: mobileNavHtml() }),
     crumbs: crumbs(meta),
-    main: fill(fill(body, { ...shared, leadForm: partial('lead-form'), portfolioGallery: portfolioGallery(), portfolioPreview: portfolioPreview() }), { ...shared, interestOptions }),
+    main: fill(main, shared),
     footer: fill(footer, { ...shared, footerProducts: footerProducts(), footerCompany: footerCompany(), footerLegal: footerLegal() }),
     bodyClass: meta.bodyClass || '',
-    actionBar: meta.noActionBar ? '' : `<div class="action-bar" id="action-bar"><a class="btn btn-secondary" href="tel:${site.phoneE164}">Call</a><a class="btn btn-primary" href="/contact-us/">Free Consultation</a></div>`
+    actionBar: meta.noActionBar ? '' : `<div class="action-bar" id="action-bar"><a class="btn btn-secondary" href="tel:${site.phoneE164}">Call</a><a class="btn btn-primary" href="${meta.service ? '#consultation' : '/contact-us/'}">Free Consultation</a></div>`
   });
+  if (/\{\{\w/.test(html)) throw new Error('Unfilled placeholder in ' + meta.path + ': ' + html.match(/\{\{[^}]+\}\}/)[0]);
   const out = outPath(meta.path);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   // Cache-bust CSS/JS with a content hash so browsers never pair new HTML with stale styles.
   html = html.replace(/(href|src)="(\/assets\/(?:css|js)\/[^"?]+)"/g, (_, a, p) => `${a}="${p}?v=${assetVersion(p)}"`);
   const rooted = BASE
-    ? html.replace(/\b(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`).replace('<html lang="en">', `<html lang="en" data-base="${BASE}">`)
+    ? html.replace(/\b(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`)
+        .replace(/\bsrcset="([^"]+)"/g, (_, v) => `srcset="${v.replace(/(^|,\s*)\/(?!\/)/g, `$1${BASE}/`)}"`)
+        .replace('<html lang="en">', `<html lang="en" data-base="${BASE}">`)
     : html;
   fs.writeFileSync(out, rooted.replace(/\r?\n(\r?\n){2,}/g, '\n\n'));
   built.push({ path: meta.path, index });
 }
 
-// Sitemap: public, canonical, indexable only
 const urls = built.filter(b => b.index && b.path !== '/404.html').map(b => `  <url><loc>${site.origin}${b.path}</loc></url>`).join('\n');
 fs.writeFileSync(path.join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
-fs.writeFileSync(path.join(DIST, 'robots.txt'), PREVIEW
-  ? 'User-agent: *\nDisallow: /\n'
+fs.writeFileSync(path.join(DIST, 'robots.txt'), PREVIEW ? 'User-agent: *\nDisallow: /\n'
   : `User-agent: *\nDisallow: /thank-you/\nDisallow: /api/\n\nSitemap: ${site.origin}/sitemap.xml\n`);
-// Cloudflare Pages headers. Staging should also sit behind Cloudflare Access.
-fs.writeFileSync(path.join(DIST, '_headers'), [
-  '/*', '  X-Content-Type-Options: nosniff', '  Referrer-Policy: strict-origin-when-cross-origin', '  X-Frame-Options: SAMEORIGIN',
-  PREVIEW ? '  X-Robots-Tag: noindex' : '', '/assets/*', '  Cache-Control: public, max-age=604800', ''
-].filter(Boolean).join('\n'));
-// Redirects stay empty until the live URL inventory is crawled and verified.
+fs.writeFileSync(path.join(DIST, '_headers'), ['/*', '  X-Content-Type-Options: nosniff', '  Referrer-Policy: strict-origin-when-cross-origin',
+  '  X-Frame-Options: SAMEORIGIN', PREVIEW ? '  X-Robots-Tag: noindex' : '', '/assets/*', '  Cache-Control: public, max-age=604800', ''].filter(Boolean).join('\n'));
 fs.writeFileSync(path.join(DIST, '_redirects'), '# Add one-hop 301s here only after verifying the live URL exists. See routes.json legacyRedirectCandidates.\n');
-console.log(`Built ${built.length} pages${PREVIEW ? ' (preview mode, all noindex)' : ''}:`, built.map(b => b.path).join(', '));
+console.log(`Built ${built.length} pages${PREVIEW ? ' (preview mode, all noindex)' : ''}:\n  ` + built.map(b => b.path).join('\n  '));

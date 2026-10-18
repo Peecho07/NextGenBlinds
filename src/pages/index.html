@@ -2,7 +2,7 @@
 {
   "path": "/",
   "title": "Custom Window Treatments in Palm Beach County | NextGen Blinds",
-  "description": "Custom blinds, shades, shutters, and drapery for Palm Beach County homes. Request a free in-home consultation to see samples and get a clear plan."
+  "description": "Motorized shades, plantation shutters, custom drapery, and outdoor screens for Palm Beach County homes. Request a free in-home consultation."
 }
 -->
 <section class="hero">
@@ -10,26 +10,23 @@
     <div>
       <span class="eyebrow">Palm Beach County, Florida</span>
       <h1>Custom Window Treatments for Palm Beach County Homes</h1>
-      <p class="lead">Beautiful light. Privacy that fits your life. Explore blinds, shades, shutters, and drapery with an in-home consultation and a clear plan for installation.</p>
+      <p class="lead">Beautiful light. Privacy that fits your life. Explore blinds, motorized shades, shutters, drapery, and outdoor screens with an in-home consultation and a clear plan for installation.</p>
       <div class="btn-row">
         <a class="btn btn-primary" href="/contact-us/">Request a Free Consultation</a>
         <a class="btn btn-secondary" href="tel:{{phoneE164}}">Call {{phone}}</a>
       </div>
       <p class="hero-note">We bring samples to your home so you can see fabrics and finishes in your own light.</p>
     </div>
-    <div class="hero-media" data-asset="ASSET_REQUIRED: hero room photo, real NextGen install, desktop + mobile crop">
-      <img src="/assets/img/portfolio/drapery/drapery-01.jpg" alt="Floor-to-ceiling linen drapery panels framing living room windows" width="640" height="480" fetchpriority="high">
-    </div>
+    <div class="hero-media">{{photo:hero|eager}}</div>
   </div>
 </section>
 
-<!-- OWNER_CONFIRM: each commitment below must match how the business actually operates -->
 <div class="facts">
   <div class="wrap">
     <ul>
       <li><b>Free in-home consultation</b><span>Samples and advice at your windows</span></li>
       <li><b>Custom measured</b><span>Made to order for your openings</span></li>
-      <li><b>Professional installation</b><span>Fitted, adjusted, and explained</span></li>
+      <li><b>Our own installers</b><span>Never a subcontractor</span></li>
       <li><b>Local service</b><span>Homes across Palm Beach County</span></li>
     </ul>
   </div>
@@ -40,33 +37,15 @@
     <div class="sec-head">
       <span class="eyebrow">What we offer</span>
       <h2 id="products-h">Find a direction for every room</h2>
-      <p class="lead">Each family solves a different mix of light, privacy, and style. Start with what you like, then we'll narrow it down at your windows.</p>
+      <p class="lead">Each product solves a different mix of light, privacy, and style. Start with what you like, then we'll narrow it down at your windows.</p>
     </div>
+    <div class="group-head"><h3>Inside the home</h3></div>
     <div class="families">
-      <a class="family" href="{{href:/services/blinds/|blinds}}">
-        <div class="media" data-asset="ASSET_REQUIRED: blinds install"><img src="/assets/img/portfolio/faux-wood/faux-wood-02.webp" alt="Close-up of warm wood-tone faux wood blinds" loading="lazy" width="640" height="640"></div>
-        <div class="body"><h3>Custom Blinds</h3><p>Tilt the slats to aim light exactly where you want it. A practical choice for kitchens, offices, and bedrooms.</p><span class="link-arrow">Explore blinds</span></div>
-      </a>
-      <a class="family" href="{{href:/services/roller-solar-shades/|roller-solar}}">
-        <div class="media" data-asset="ASSET_REQUIRED: roller or solar shade install"><img src="/assets/img/portfolio/solar-shades/solar-shades-01.webp" alt="Gray textured roller shade half lowered over a bedroom window" loading="lazy" width="640" height="640"></div>
-        <div class="body"><h3>Roller &amp; Solar Shades</h3><p>Clean lines that soften glare during the day. Fabric choice decides how much view, light, and privacy you keep.</p><span class="link-arrow">Explore roller and solar</span></div>
-      </a>
-      <a class="family" href="{{href:/services/plantation-shutters/|shutters}}">
-        <div class="media" data-asset="ASSET_REQUIRED: interior shutter install"><img src="/assets/img/portfolio/shutters/shutters-05.jpg" alt="Three-panel white plantation shutters on a bedroom window" loading="lazy" width="480" height="640"></div>
-        <div class="body"><h3>Plantation Shutters</h3><p>A finished, built-in look with louvers you can open or close. Interior shutters for style and light control.</p><span class="link-arrow">Explore shutters</span></div>
-      </a>
-      <a class="family" href="{{href:/services/custom-drapery/|drapery}}">
-        <div class="media" data-asset="ASSET_REQUIRED: drapery install with fabric detail"><img src="/assets/img/portfolio/drapery/drapery-02.jpg" alt="Custom drapery panels in a finished room" loading="lazy" width="640" height="480"></div>
-        <div class="body"><h3>Custom Drapery</h3><p>Fabric, fullness, and hardware that complete a room. Layer over shades for daytime and evening moods.</p><span class="link-arrow">Explore drapery</span></div>
-      </a>
-      <a class="family" href="{{href:/services/zebra-banded-shades/|zebra}}">
-        <div class="media" data-asset="ASSET_REQUIRED: zebra shade in open and closed positions"><img src="/assets/img/portfolio/zebra/zebra-01.webp" alt="Gray zebra shade with alternating sheer and solid bands" loading="lazy" width="640" height="640"></div>
-        <div class="body"><h3>Zebra &amp; Banded Shades</h3><p>Alternating sheer and solid bands. Shift them to let light in or line them up for more privacy.</p><span class="link-arrow">Explore zebra shades</span></div>
-      </a>
-      <a class="family" href="{{href:/services/motorized-shades/|motorized-shades}}">
-        <div class="media" data-asset="ASSET_REQUIRED: motorized shade install"><img src="/assets/img/portfolio/motorized/motorized-02.webp" alt="White motorized roller shade with a smart speaker and remote on the sill" loading="lazy" width="384" height="384"></div>
-        <div class="body"><h3>Motorized Shades</h3><p>Raise and lower shades with a remote, app, or schedule. Great for tall, wide, or hard-to-reach windows.</p><span class="link-arrow">Explore motorization</span></div>
-      </a>
+{{cards:indoor}}
+    </div>
+    <div class="group-head"><h3>Outdoor living</h3></div>
+    <div class="families two">
+{{cards:outdoor}}
     </div>
   </div>
 </section>
@@ -78,11 +57,11 @@
       <h2 id="needs-h">Choose by what's bothering you</h2>
     </div>
     <div class="needs">
-      <div class="need"><h3>Too much glare</h3><p>Screens and TVs washed out in the afternoon.</p><p class="fits">Often a fit: solar shades, blinds</p></div>
-      <div class="need"><h3>Privacy, day and night</h3><p>Some fabrics that hide the room by day show it at night with lights on.</p><p class="fits">Often a fit: zebra shades, shutters, layering</p></div>
-      <div class="need"><h3>A darker bedroom</h3><p>Room darkening depends on fabric, mounting, and edge gaps.</p><p class="fits">Often a fit: blackout fabrics, layered drapery</p></div>
-      <div class="need"><h3>Big or tall windows</h3><p>Wide sliders and high windows are hard to reach and heavy to lift.</p><p class="fits">Often a fit: motorized shades, drapery</p></div>
-      <div class="need"><h3>A finished look</h3><p>You want the room to feel complete, not just covered.</p><p class="fits">Often a fit: shutters, custom drapery</p></div>
+      <div class="need"><h3>Too much glare</h3><p>Screens and TVs washed out in the afternoon.</p><p class="fits">Often a fit: <a href="{{product:roller-solar}}">solar shades</a>, <a href="{{product:motorized-shades}}">motorized shades</a></p></div>
+      <div class="need"><h3>Privacy, day and night</h3><p>Some fabrics that hide the room by day show it at night with lights on.</p><p class="fits">Often a fit: <a href="{{product:zebra}}">zebra shades</a>, <a href="{{product:shutters}}">shutters</a></p></div>
+      <div class="need"><h3>A darker bedroom</h3><p>Room darkening depends on fabric, mounting, and edge gaps.</p><p class="fits">Often a fit: <a href="{{product:drapery}}">lined drapery</a>, <a href="{{product:roller-solar}}">blackout rollers</a></p></div>
+      <div class="need"><h3>Big or tall windows</h3><p>Wide sliders and high windows are hard to reach and heavy to lift.</p><p class="fits">Often a fit: <a href="{{product:motorized-shades}}">motorized shades</a>, <a href="{{product:drapery}}">drapery</a></p></div>
+      <div class="need"><h3>A hot, buggy patio</h3><p>The outdoor space is there, but nobody uses it in the afternoon.</p><p class="fits">Often a fit: <a href="{{product:outdoor-screens}}">outdoor screens</a>, <a href="{{product:awnings}}">awnings</a></p></div>
     </div>
     <p class="muted note" style="margin-top:var(--s3)">These are starting points, not guarantees. The right answer depends on your window, the sun exposure, and how you use the room, which is what the consultation is for.</p>
   </div>
@@ -101,23 +80,23 @@
 </section>
 
 <section class="section" id="how-it-works" aria-labelledby="how-h">
-  <div class="wrap">
-    <div class="sec-head">
+  <div class="wrap split">
+    <div class="media">{{photo:measuring}}</div>
+    <div>
       <span class="eyebrow">How it works</span>
       <h2 id="how-h">From first visit to finished room</h2>
+      <ol class="steps steps-stack">
+        <li><h3>Consultation at your home</h3><p>We bring samples, look at your windows in real light, and talk through light, privacy, and style.</p></li>
+        <li><h3>Measurement and a written proposal</h3><p>We measure each opening and give you the products, options, and price in writing. You choose what to move forward with.</p></li>
+        <li><h3>Installation and walkthrough</h3><p>Our own installers fit, adjust, and check everything. We show you how everything operates.</p></li>
+      </ol>
     </div>
-    <!-- OWNER_CONFIRM: steps, what is included, who measures, who installs -->
-    <ol class="steps">
-      <li><h3>Consultation at your home</h3><p>We bring samples, look at your windows in real light, and talk through light, privacy, and style. You'll know what fits before you decide anything.</p></li>
-      <li><h3>Measurement and a written proposal</h3><p>We measure each opening and give you a written proposal with the products, options, and price. You choose what to move forward with.</p></li>
-      <li><h3>Installation and walkthrough</h3><p>Your treatments are installed, adjusted, and checked. We show you how everything operates and how to care for it.</p></li>
-    </ol>
   </div>
 </section>
 
 <section class="section bg-warm" aria-labelledby="motor-h">
   <div class="wrap split">
-    <div class="media" data-asset="ASSET_REQUIRED: real motorized install, optional click-to-play captioned demo"><img src="/assets/img/portfolio/motorized/motorized-02.webp" alt="White motorized roller shade with a smart speaker and remote on the sill" loading="lazy" width="384" height="384"></div>
+    <div class="media">{{photo:motorized-shades}}</div>
     <div>
       <span class="eyebrow">Motorization</span>
       <h2 id="motor-h">Shades that move on your schedule</h2>
@@ -127,13 +106,24 @@
         <li>Battery and wired power options, which affect installation</li>
         <li>Voice and smart-home control need a compatible motor and hub</li>
       </ul>
-      <p class="muted">Compatibility varies by motor and platform, so we confirm what works with your setup before you order.</p>
-      <a class="link-arrow" href="{{href:/services/motorized-shades/|motorized-shades}}">Plan motorized shades</a>
+      <a class="link-arrow" href="{{product:motorized-shades}}">Explore motorized shades</a>
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="area-h">
+<section class="section" aria-labelledby="layer-h">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Layering</span>
+      <h2 id="layer-h">One look by day, another by night</h2>
+      <p>Pairing a shade with drapery lets you control light and privacy separately. Keep the view during the day, then close the drapery for a softer, more private room in the evening.</p>
+      <a class="link-arrow" href="{{product:drapery}}">Explore custom drapery</a>
+    </div>
+    <div class="media">{{photo:evening-drapery}}</div>
+  </div>
+</section>
+
+<section class="section bg-warm" aria-labelledby="area-h">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Service area</span>
@@ -148,7 +138,7 @@
   </div>
 </section>
 
-<section class="section bg-warm" aria-labelledby="faq-h">
+<section class="section" aria-labelledby="faq-h">
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Questions</span>
@@ -165,7 +155,7 @@
       </details>
       <details>
         <summary>Do solar shades give privacy at night?</summary>
-        <div class="ans"><p>Often not fully. Many solar fabrics let you see out during the day, but when lights are on inside after dark, people outside may be able to see in. How much depends on the fabric's openness and your lighting. If nighttime privacy matters, we'll show options like tighter fabrics or a second layer.</p></div>
+        <div class="ans"><p>Often not fully. Many solar fabrics let you see out during the day, but when lights are on inside after dark, people outside may be able to see in. If nighttime privacy matters, we'll show options like tighter fabrics or a second layer.</p></div>
       </details>
       <details>
         <summary>Is "blackout" the same as completely dark?</summary>
@@ -179,12 +169,20 @@
   </div>
 </section>
 
+<section class="photo-band" aria-labelledby="band-h">
+  {{photo:villa-dusk}}
+  <div class="wrap">
+    <h2 id="band-h">Inside and out, made for how you live</h2>
+    <p>From bedroom drapery to patio screens, one consultation covers the whole home.</p>
+  </div>
+</section>
+
 <section class="section bg-blue" id="consultation" aria-labelledby="consult-h">
   <div class="wrap inquiry">
     <div>
       <span class="eyebrow" style="color:#DCE8F5">Free in-home consultation</span>
       <h2 id="consult-h">Let's look at your windows together</h2>
-      <p>Tell us how to reach you. We'll follow up to set a time, then bring samples to your home.</p>
+      <p>Tell us how to reach you. We'll call within one business day to set a time, then bring samples to your home.</p>
       <ul class="checks">
         <li>See samples in your own light</li>
         <li>Measurement and a written proposal</li>

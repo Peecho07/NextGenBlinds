@@ -1,0 +1,82 @@
+<section class="hero product-hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">{{groupLabel}}</span>
+      <h1>{{h1}}</h1>
+      <p class="lead">{{lead}}</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#consultation">Get a Free Consultation</a>
+        <a class="btn btn-secondary" href="tel:{{phoneE164}}">Call {{phone}}</a>
+      </div>
+      <p class="hero-note">We bring samples to your home so you can compare options at your own windows.</p>
+    </div>
+    <div class="hero-media">{{heroPhoto}}</div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="fit-h">
+  <div class="wrap split split-text">
+    <div>
+      <span class="eyebrow">Is it a fit?</span>
+      <h2 id="fit-h">Where {{nameLower}} work well</h2>
+      <ul class="checks">{{goodFor}}</ul>
+      <a class="btn btn-primary" href="#consultation">Ask about {{nameLower}}</a>
+    </div>
+    <div>
+      <h2 class="h3-like">Good to know before you choose</h2>
+      <dl class="know">{{know}}</dl>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-warm" aria-labelledby="steps-h">
+  <div class="wrap split">
+    <div class="media">{{measurePhoto}}</div>
+    <div>
+      <span class="eyebrow">How it works</span>
+      <h2 id="steps-h">Three steps to finished {{nameLower}}</h2>
+      <ol class="steps steps-stack">
+        <li><h3>Consultation at your home</h3><p>We bring samples, look at your windows in real light, and talk through what you need.</p></li>
+        <li><h3>Measurement and a written proposal</h3><p>Each opening is measured, and you get the products, options, and price in writing.</p></li>
+        <li><h3>Installation and walkthrough</h3><p>Our own installers fit, adjust, and explain everything before they leave.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Questions</span>
+      <h2 id="faq-h">{{name}} questions</h2>
+    </div>
+    <div class="faq read">{{faq}}</div>
+  </div>
+</section>
+
+<section class="section bg-blue" id="consultation" aria-labelledby="consult-h">
+  <div class="wrap inquiry">
+    <div>
+      <span class="eyebrow" style="color:#DCE8F5">Free in-home consultation</span>
+      <h2 id="consult-h">Plan your {{nameLower}}</h2>
+      <p>Tell us how to reach you. We'll call within one business day to set a time and bring {{nameLower}} samples to your home.</p>
+      <ul class="checks">
+        <li>See options in your own light</li>
+        <li>Measurement and a written proposal</li>
+        <li>No obligation</li>
+      </ul>
+      <p>Prefer to talk now? Call <a href="tel:{{phoneE164}}" style="color:#fff;font-weight:800">{{phone}}</a></p>
+    </div>
+    {{leadForm}}
+  </div>
+</section>
+
+<section class="section" aria-labelledby="related-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Also consider</span>
+      <h2 id="related-h">Other ways to handle light and privacy</h2>
+    </div>
+    <div class="families">{{related}}</div>
+  </div>
+</section>

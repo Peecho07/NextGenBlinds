@@ -6,7 +6,7 @@
 //  429 {accepted:false,message}      rate limited
 //  503 {accepted:false,message}      storage unavailable, nothing stored
 
-export const PRODUCTS = ['blinds', 'shades', 'motorized-shades', 'shutters', 'drapery', 'roller-solar', 'zebra'];
+export const PRODUCTS = ['blinds', 'motorized-shades', 'shutters', 'drapery', 'roller-solar', 'zebra', 'outdoor-screens', 'awnings'];
 const METHODS = ['phone', 'text', 'email'];
 const WINDOWS = ['', '1 to 3', '4 to 8', '9 to 15', 'Whole home'];
 const TIMING = ['', 'Mornings', 'Afternoons', 'Evenings'];

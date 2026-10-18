@@ -66,3 +66,26 @@ Browser validates → `POST /api/lead` with an Idempotency-Key → server valida
 - `owner-register.md` every claim and asset still needing owner approval
 - `src/routes.json` route manifest for the full site
 - `functions/` production lead endpoint; `workers/` notification retry
+
+## Product landing pages (added Oct 2026)
+
+Eight product pages, each a standalone landing page: photo hero with CTA, where it works well, good to know, how it works, FAQ (with FAQ schema), the consultation form with that product preselected, and related products.
+
+| Route | Photo |
+|---|---|
+| `/services/blinds/` | Portfolio photo `faux-wood/faux-wood-02.webp` |
+| `/services/motorized-shades/` | Pexels 6444253 |
+| `/services/plantation-shutters/` | Pexels 2682318 |
+| `/services/custom-drapery/` | Pexels 7546217 |
+| `/services/roller-solar-shades/` | Pexels 6980665 |
+| `/services/zebra-banded-shades/` | Pexels 9270061 |
+| `/services/outdoor-motorized-screens/` | Pexels 5563471 |
+| `/services/retractable-awnings/` | Illustration (no photo yet) |
+
+- Content: `src/products.json`. Layout: `src/partials/product.html`. Edit the JSON and rebuild; no HTML needed.
+- Homepage photos come from the reference build (nextgen-blinds.vercel.app): hero 36710315, how it works 5691534, motorization 6444253, layering 8135529, closing band 27195984, plus every product card.
+- Photos load from the Pexels CDN (free commercial license). To self-host, run `bash tools/fetch-images.sh` on any machine with internet, then rebuild. To swap in a real install photo, edit `photos` in `src/site.json`.
+- Confirmed business facts (address, hours, response time) live in `src/site.json` and feed the footer, contact page, and schema.
+- Menu collapses to the Menu button below 1120px so the longer nav never wraps.
+
+**Lead form on GitHub Pages:** Pages only serves static files, so `/api/lead` does not exist there and the form shows "temporarily unavailable" with the phone number. Real submissions need the Cloudflare Pages (or Netlify) deploy with the function and storage set up, as described above.

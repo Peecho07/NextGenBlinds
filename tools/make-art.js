@@ -68,5 +68,24 @@ const art = {
     extra: `<g><rect x="60" y="330" width="170" height="70" rx="10" fill="#B8A88F"/><rect x="50" y="310" width="190" height="34" rx="12" fill="#CDBFA8"/><rect x="600" y="300" width="70" height="100" rx="4" fill="#E2D7C6"/><circle cx="635" cy="282" r="26" fill="#93A98C"/></g>` })
 };
 
+// Retractable awning over a patio (no reference photo exists for this product yet)
+art['awning'] = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Illustration of a retractable awning extended over a patio">
+<defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9CC3E4"/><stop offset="1" stop-color="#E4F0F8"/></linearGradient></defs>
+<rect width="${W}" height="${H}" fill="url(#sk)"/>
+${palm(690, 380, 1.6)}${palm(90, 390, 1.3)}
+<rect x="140" y="60" width="520" height="320" fill="#EFE6D6"/>
+<rect x="140" y="52" width="520" height="12" fill="#D9CBB2"/>
+<rect x="250" y="190" width="300" height="190" fill="#B9CFE0" stroke="#FFFFFF" stroke-width="10"/>
+<rect x="397" y="190" width="6" height="190" fill="#FFFFFF"/>
+<polygon points="170,110 630,110 700,230 100,230" fill="#356AA6"/>
+${Array.from({ length: 9 }, (_, i) => `<polygon points="${170 + i * 51.1},110 ${195 + i * 51.1},110 ${100 + i * 66.7 + 33},230 ${100 + i * 66.7},230" fill="#FFFFFF" opacity=".9"/>`).join('')}
+<path d="M100 230 q33 18 66 0 q33 18 66 0 q33 18 66 0 q33 18 66 0 q33 18 66 0 q33 18 66 0 q33 18 66 0 q33 18 66 0 q33 18 66 0" fill="#356AA6"/>
+<line x1="170" y1="114" x2="110" y2="226" stroke="#6E7782" stroke-width="5"/><line x1="630" y1="114" x2="690" y2="226" stroke="#6E7782" stroke-width="5"/>
+<rect x="0" y="380" width="${W}" height="120" fill="#D8C9AE"/>
+<polygon points="100,248 700,248 790,380 10,380" fill="#1F3A55" opacity=".12"/>
+<g><rect x="300" y="320" width="200" height="12" rx="3" fill="#8C6D4A"/><rect x="315" y="332" width="8" height="48" fill="#8C6D4A"/><rect x="477" y="332" width="8" height="48" fill="#8C6D4A"/>
+<rect x="230" y="330" width="50" height="50" rx="6" fill="#FFFFFF" opacity=".9"/><rect x="520" y="330" width="50" height="50" rx="6" fill="#FFFFFF" opacity=".9"/></g>
+</svg>`;
+
 for (const [name, svg] of Object.entries(art)) fs.writeFileSync(path.join(out, name + '.svg'), svg);
 console.log('Wrote', Object.keys(art).length, 'draft illustrations to', out);
