@@ -100,3 +100,16 @@ One per product, for paid ads only: `/lp/blinds/`, `/lp/motorized-shades/`, `/lp
 - **City in the headline:** add `?area=avenir` (or any key in `adAreas` in `src/site.json`) to show "Motorized Shades in Avenir". Use it in ZIP-targeted ads so the page matches the ad.
 - **Tracking:** UTM tags and Google's `gclid` are saved with every lead, along with the landing page. Use them on every ad link, e.g. `/lp/motorized-shades/?area=avenir&utm_source=facebook&utm_medium=paid&utm_campaign=avenir-33412`.
 - **Conversion tags:** paste `googleTagId`, `googleAdsConversion` (format `AW-XXXXXXX/label`) and `metaPixelId` into `ads` in `src/site.json` and rebuild. The tags then load on every page, and one conversion fires per accepted lead on `/thank-you/`. Update the privacy policy before turning them on.
+
+## Lead form on Netlify (current setup)
+
+`formProvider` in `src/site.json` is `"netlify"`, so the consultation form uses **Netlify Forms**:
+
+- At deploy, Netlify reads the `consultation` form in the HTML and stores every submission (free, unlimited since April 2026).
+- The browser posts the form to `/` and, on success, goes to `/thank-you/` with a reference number like `NG-261018-82D180`. The same reference is in the submission, so you can match a phone call to a lead.
+- Each submission includes `page` (the landing page) and `attribution` (ad source, campaign, gclid) in plain words.
+- Spam: the `company` honeypot field plus Netlify's built-in spam filter.
+
+**One-time setup in Netlify:** Site configuration > Forms > enable form detection, then redeploy. Then Forms > Form notifications > Add notification > Email notification > your lead inbox, form `consultation`.
+
+To go back to the Cloudflare function instead, set `formProvider` to `"api"` and follow the Cloudflare steps above. GitHub Pages can't accept either kind of submission; it's preview only.
