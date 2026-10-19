@@ -295,40 +295,76 @@
       "phase": 2
     },
     {
-      "path": "/lp/free-consultation/",
-      "title": "Campaign: Free Consultation",
+      "path": "/lp/blinds/",
+      "title": "Ad landing page: Custom Blinds",
       "type": "campaign",
-      "status": "gated",
+      "status": "built",
       "index": false,
       "phase": 5,
-      "blocker": "Launch only after lead delivery is verified live."
+      "note": "Paid ads only. Noindex, not linked from the site. Needs live lead delivery (Cloudflare) before spending on ads."
     },
     {
       "path": "/lp/motorized-shades/",
-      "title": "Campaign: Motorized",
+      "title": "Ad landing page: Motorized Shades",
       "type": "campaign",
-      "status": "gated",
+      "status": "built",
       "index": false,
       "phase": 5,
-      "blocker": "Launch only after lead delivery is verified live."
+      "note": "Paid ads only. Noindex, not linked from the site. Needs live lead delivery (Cloudflare) before spending on ads."
     },
     {
       "path": "/lp/plantation-shutters/",
-      "title": "Campaign: Shutters",
+      "title": "Ad landing page: Plantation Shutters",
       "type": "campaign",
-      "status": "gated",
+      "status": "built",
       "index": false,
       "phase": 5,
-      "blocker": "Launch only after lead delivery is verified live."
+      "note": "Paid ads only. Noindex, not linked from the site. Needs live lead delivery (Cloudflare) before spending on ads."
     },
     {
-      "path": "/lp/outdoor-screens/",
-      "title": "Campaign: Outdoor Screens",
+      "path": "/lp/custom-drapery/",
+      "title": "Ad landing page: Custom Drapery",
       "type": "campaign",
-      "status": "gated",
+      "status": "built",
       "index": false,
       "phase": 5,
-      "blocker": "Requires outdoor offering confirmation and live lead delivery."
+      "note": "Paid ads only. Noindex, not linked from the site. Needs live lead delivery (Cloudflare) before spending on ads."
+    },
+    {
+      "path": "/lp/roller-solar-shades/",
+      "title": "Ad landing page: Roller & Solar Shades",
+      "type": "campaign",
+      "status": "built",
+      "index": false,
+      "phase": 5,
+      "note": "Paid ads only. Noindex, not linked from the site. Needs live lead delivery (Cloudflare) before spending on ads."
+    },
+    {
+      "path": "/lp/zebra-banded-shades/",
+      "title": "Ad landing page: Zebra & Banded Shades",
+      "type": "campaign",
+      "status": "built",
+      "index": false,
+      "phase": 5,
+      "note": "Paid ads only. Noindex, not linked from the site. Needs live lead delivery (Cloudflare) before spending on ads."
+    },
+    {
+      "path": "/lp/outdoor-motorized-screens/",
+      "title": "Ad landing page: Outdoor Motorized Screens",
+      "type": "campaign",
+      "status": "built",
+      "index": false,
+      "phase": 5,
+      "note": "Paid ads only. Noindex, not linked from the site. Needs live lead delivery (Cloudflare) before spending on ads."
+    },
+    {
+      "path": "/lp/retractable-awnings/",
+      "title": "Ad landing page: Retractable Awnings",
+      "type": "campaign",
+      "status": "built",
+      "index": false,
+      "phase": 5,
+      "note": "Paid ads only. Noindex, not linked from the site. Needs live lead delivery (Cloudflare) before spending on ads."
     }
   ],
   "nav": [

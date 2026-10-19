@@ -43,7 +43,16 @@
         "Do blinds block all light?",
         "Closed blinds block most light, but some comes through the slat holes and edges. For a darker room, we may suggest pairing them with drapery."
       ]
-    ]
+    ],
+    "lp": {
+      "headline": "Custom Blinds",
+      "sub": "Faux wood and wood blinds made to fit every window, measured and installed by our own team.",
+      "bullets": [
+        "Moisture-resistant faux wood for Florida homes",
+        "Cordless options for kids and pets",
+        "Free in-home samples and measuring"
+      ]
+    }
   },
   {
     "id": "motorized-shades",
@@ -89,7 +98,16 @@
         "What decides the price?",
         "The number and size of shades, the fabric, the motor and power type, and whether you add a hub or sensors. Your written proposal breaks it down so you can compare options."
       ]
-    ]
+    ],
+    "lp": {
+      "headline": "Motorized Shades",
+      "sub": "Control every shade from your phone, a remote, or a schedule. No cords, no reaching.",
+      "bullets": [
+        "Hunter Douglas PowerView, Somfy and more",
+        "Works with Alexa, Google Home and HomeKit",
+        "Usually no new wiring needed"
+      ]
+    }
   },
   {
     "id": "shutters",
@@ -135,7 +153,16 @@
         "How long do custom shutters take?",
         "Shutters are made to order, so there's a production period before installation. We'll give you the expected timing in your proposal."
       ]
-    ]
+    ],
+    "lp": {
+      "headline": "Plantation Shutters",
+      "sub": "A built-in look made to fit each window. Tilt for light, close for privacy.",
+      "bullets": [
+        "Wood and humidity-resistant composite",
+        "Custom fit, including sliders and doors",
+        "Free in-home samples and measuring"
+      ]
+    }
   },
   {
     "id": "drapery",
@@ -181,7 +208,16 @@
         "Can drapery be motorized?",
         "Motorized tracks are available for large spans and hard-to-reach windows. We'll confirm options for your opening at the consultation."
       ]
-    ]
+    ],
+    "lp": {
+      "headline": "Custom Drapery",
+      "sub": "Fabric, lining and hardware chosen for your room, measured and hung to the right length.",
+      "bullets": [
+        "Blackout and privacy linings",
+        "Layer over shades for day and night",
+        "Motorized tracks for big windows"
+      ]
+    }
   },
   {
     "id": "roller-solar",
@@ -227,7 +263,16 @@
         "Can roller shades be motorized?",
         "Yes, roller shades are one of the most common motorized products. See our motorized shades page for power and control options."
       ]
-    ]
+    ],
+    "lp": {
+      "headline": "Roller & Solar Shades",
+      "sub": "Cut the glare and the heat without giving up your view.",
+      "bullets": [
+        "Choose how much view and privacy you keep",
+        "Light-filtering to blackout fabrics",
+        "Easy to motorize"
+      ]
+    }
   },
   {
     "id": "zebra",
@@ -273,7 +318,16 @@
         "Do they work on large windows?",
         "Yes, within the size limits of the product. Very wide openings may be split into more than one shade. We'll confirm when we measure."
       ]
-    ]
+    ],
+    "lp": {
+      "headline": "Zebra Shades",
+      "sub": "Two shades in one. Offset the bands for light, line them up for privacy.",
+      "bullets": [
+        "Daylight and privacy in one shade",
+        "Modern, tailored look",
+        "Cordless and motorized options"
+      ]
+    }
   },
   {
     "id": "outdoor-screens",
@@ -319,7 +373,16 @@
         "Do I need an electrician?",
         "Motorized screens need a power source near the opening. If there isn't one, an electrician may need to add it. We'll flag this at the consultation."
       ]
-    ]
+    ],
+    "lp": {
+      "headline": "Outdoor Motorized Screens",
+      "sub": "Take back your patio from the sun, the bugs and the neighbors.",
+      "bullets": [
+        "Drop down at the touch of a button",
+        "Edge tracks help keep bugs out",
+        "Rolls away when you do not need it"
+      ]
+    }
   },
   {
     "id": "awnings",
@@ -365,6 +428,15 @@
         "How far can an awning extend?",
         "It depends on the model and the wall it mounts to. We'll measure and show you how much shade the space can get."
       ]
-    ]
+    ],
+    "lp": {
+      "headline": "Retractable Awnings",
+      "sub": "Shade on demand for your patio. Extend it for shade, retract it for sun.",
+      "bullets": [
+        "Manual or motorized",
+        "Optional wind sensors",
+        "Mounting checked at your free visit"
+      ]
+    }
   }
 ]

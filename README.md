@@ -89,3 +89,14 @@ Eight product pages, each a standalone landing page: photo hero with CTA, where 
 - Menu collapses to the Menu button below 1120px so the longer nav never wraps.
 
 **Lead form on GitHub Pages:** Pages only serves static files, so `/api/lead` does not exist there and the form shows "temporarily unavailable" with the phone number. Real submissions need the Cloudflare Pages (or Netlify) deploy with the function and storage set up, as described above.
+
+## Ad landing pages (`/lp/`)
+
+One per product, for paid ads only: `/lp/blinds/`, `/lp/motorized-shades/`, `/lp/plantation-shutters/`, `/lp/custom-drapery/`, `/lp/roller-solar-shades/`, `/lp/zebra-banded-shades/`, `/lp/outdoor-motorized-screens/`, `/lp/retractable-awnings/`.
+
+- No site menu, just logo and a call button, and the form next to the headline (it's the first thing after the bullets on phones). Fewer exits means more requests.
+- Noindex and left out of the sitemap, so they never compete with the SEO product pages.
+- Copy lives under `lp` in `src/products.json`.
+- **City in the headline:** add `?area=avenir` (or any key in `adAreas` in `src/site.json`) to show "Motorized Shades in Avenir". Use it in ZIP-targeted ads so the page matches the ad.
+- **Tracking:** UTM tags and Google's `gclid` are saved with every lead, along with the landing page. Use them on every ad link, e.g. `/lp/motorized-shades/?area=avenir&utm_source=facebook&utm_medium=paid&utm_campaign=avenir-33412`.
+- **Conversion tags:** paste `googleTagId`, `googleAdsConversion` (format `AW-XXXXXXX/label`) and `metaPixelId` into `ads` in `src/site.json` and rebuild. The tags then load on every page, and one conversion fires per accepted lead on `/thank-you/`. Update the privacy policy before turning them on.
