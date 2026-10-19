@@ -237,6 +237,44 @@ function productPage(p) {
   };
 }
 
+// ---------- Ad landing pages (generated, noindex, no site navigation) ----------
+function lpPage(p) {
+  const slug = p.path.split('/').filter(Boolean).pop();
+  const body = fill(partial('lp'), {
+    headline: esc(p.lp.headline), sub: esc(p.lp.sub), name: esc(p.name), nameLower: esc(p.name.toLowerCase()),
+    defaultArea: 'Palm Beach County',
+    areasJson: esc(JSON.stringify(site.adAreas || {})).replace(/&quot;/g, '"').replace(/'/g, '&#39;'),
+    bullets: p.lp.bullets.map(b => `<li>${esc(b)}</li>`).join(''),
+    goodForCards: p.goodFor.map(g => `<li>${esc(g)}</li>`).join(''),
+    heroPhoto: photo(p.photo, { eager: true, sizes: '(max-width: 900px) 100vw, 55vw' }),
+    faq: faqHtml(p.faq),
+    leadForm: leadForm(p.id)
+  });
+  return {
+    meta: { path: `/lp/${slug}/`, lp: true, noActionBar: false, bodyClass: 'lp',
+      title: `${p.lp.headline} in Palm Beach County | Free Consultation | NextGen Blinds`,
+      description: `${p.lp.sub} Free in-home consultation across Palm Beach County.` },
+    body
+  };
+}
+
+// Ad tracking tags load only when IDs are filled in src/site.json. ngConversion fires once per accepted lead on /thank-you/.
+function trackingTags() {
+  const a = site.ads || {};
+  let out = '';
+  if (a.googleTagId) {
+    out += `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(a.googleTagId)}"></script>` +
+      `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${esc(a.googleTagId)}');</script>`;
+  }
+  if (a.metaPixelId) {
+    out += `<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${esc(a.metaPixelId)}');fbq('track','PageView');</script>`;
+  }
+  if (out) {
+    out += `<script>window.ngConversion=function(id){try{${a.googleAdsConversion ? `if(window.gtag)gtag('event','conversion',{send_to:'${esc(a.googleAdsConversion)}',transaction_id:id});` : ''}if(window.fbq)fbq('track','Lead',{},{eventID:id});}catch(e){}};</script>`;
+  }
+  return out;
+}
+
 // ---------- Build ----------
 function outPath(p) { return p.endsWith('.html') ? path.join(DIST, p) : path.join(DIST, p, 'index.html'); }
 function copyDir(from, to) {
@@ -254,7 +292,8 @@ function walk(dir) {
 fs.rmSync(DIST, { recursive: true, force: true });
 copyDir(path.join(SRC, 'assets'), path.join(DIST, 'assets'));
 const layout = partial('layout'), header = partial('header'), footer = partial('footer');
-const pages = walk(path.join(SRC, 'pages')).map(parsePage).concat(products.map(productPage));
+const lpHeader = partial('lp-header'), lpFooter = partial('lp-footer');
+const pages = walk(path.join(SRC, 'pages')).map(parsePage).concat(products.map(productPage), products.map(lpPage));
 const built = [];
 
 for (const { meta, body } of pages) {
@@ -271,14 +310,14 @@ for (const { meta, body } of pages) {
     canonical: meta.path === '/404.html' ? '' : `<link rel="canonical" href="${site.origin}${meta.path}">`,
     robots: index ? 'index,follow' : 'noindex,follow',
     og: `<meta property="og:type" content="website"><meta property="og:site_name" content="${esc(site.name)}"><meta property="og:title" content="${esc(meta.title)}"><meta property="og:description" content="${esc(meta.description || '')}"><meta property="og:url" content="${site.origin}${meta.path}">`,
-    ldjson: ldjson(meta),
+    ldjson: ldjson(meta) + trackingTags(),
     draft: PREVIEW ? '<div class="draft-banner" role="note">Draft preview. Not for public release. Stock photos and some details are placeholders pending owner approval.</div>' : '',
-    header: fill(header, { ...shared, nav: navHtml(meta.path), mobileNav: mobileNavHtml() }),
-    crumbs: crumbs(meta),
+    header: meta.lp ? fill(lpHeader, shared) : fill(header, { ...shared, nav: navHtml(meta.path), mobileNav: mobileNavHtml() }),
+    crumbs: meta.lp ? '' : crumbs(meta),
     main: fill(main, shared),
-    footer: fill(footer, { ...shared, footerProducts: footerProducts(), footerCompany: footerCompany(), footerLegal: footerLegal() }),
+    footer: meta.lp ? fill(lpFooter, shared) : fill(footer, { ...shared, footerProducts: footerProducts(), footerCompany: footerCompany(), footerLegal: footerLegal() }),
     bodyClass: meta.bodyClass || '',
-    actionBar: meta.noActionBar ? '' : `<div class="action-bar" id="action-bar"><a class="btn btn-secondary" href="tel:${site.phoneE164}">Call</a><a class="btn btn-primary" href="${meta.service ? '#consultation' : '/contact-us/'}">Free Consultation</a></div>`
+    actionBar: meta.noActionBar ? '' : `<div class="action-bar" id="action-bar"><a class="btn btn-secondary" href="tel:${site.phoneE164}">Call</a><a class="btn btn-primary" href="${meta.lp ? '#lp-form' : meta.service ? '#consultation' : '/contact-us/'}">Free Consultation</a></div>`
   });
   if (/\{\{\w/.test(html)) throw new Error('Unfilled placeholder in ' + meta.path + ': ' + html.match(/\{\{[^}]+\}\}/)[0]);
   const out = outPath(meta.path);

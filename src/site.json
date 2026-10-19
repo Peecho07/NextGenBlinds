@@ -77,5 +77,31 @@
       "w": 640,
       "h": 640
     }
+  },
+  "_adAreasNote": "Ad landing pages read ?area=<key> and swap it into the headline (e.g. /lp/motorized-shades/?area=avenir shows \"Motorized Shades in Avenir\"). Only keys listed here are accepted.",
+  "adAreas": {
+    "avenir": "Avenir",
+    "palm-beach-gardens": "Palm Beach Gardens",
+    "jupiter": "Jupiter",
+    "wellington": "Wellington",
+    "west-palm-beach": "West Palm Beach",
+    "royal-palm-beach": "Royal Palm Beach",
+    "lake-worth": "Lake Worth",
+    "boca-raton": "Boca Raton",
+    "delray-beach": "Delray Beach",
+    "boynton-beach": "Boynton Beach",
+    "palm-beach": "Palm Beach",
+    "north-palm-beach": "North Palm Beach",
+    "juno-beach": "Juno Beach",
+    "tequesta": "Tequesta",
+    "greenacres": "Greenacres",
+    "loxahatchee": "Loxahatchee",
+    "westlake": "Westlake"
+  },
+  "_adsNote": "Paste IDs to turn on ad tracking site-wide. Empty = no tags load. Update the privacy policy before turning these on.",
+  "ads": {
+    "googleTagId": "",
+    "googleAdsConversion": "",
+    "metaPixelId": ""
   }
 }

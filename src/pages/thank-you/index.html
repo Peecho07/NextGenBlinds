@@ -52,6 +52,7 @@
   try { done = !!sessionStorage.getItem(key); } catch (e) {}
   if (!done) {
     if (window.dataLayer) window.dataLayer.push({ event: 'generate_lead', page: '/thank-you/' });
+    if (window.ngConversion) window.ngConversion(lead.id);
     try { sessionStorage.setItem(key, '1'); } catch (e) {}
   }
 })();

@@ -123,6 +123,18 @@
     }
   }
 
+  /* Ad landing pages: ?area=avenir swaps the city into the headline. Only keys from the built-in list are accepted. */
+  var areaEl = document.querySelector('[data-area]');
+  if (areaEl) {
+    var areaKey = (new URLSearchParams(location.search).get('area') || '').toLowerCase().replace(/[^a-z-]/g, '');
+    var areas = {};
+    try { areas = JSON.parse(areaEl.getAttribute('data-areas') || '{}'); } catch (e) {}
+    if (areaKey && Object.prototype.hasOwnProperty.call(areas, areaKey)) {
+      areaEl.textContent = areas[areaKey];
+      document.title = document.title.replace('Palm Beach County', areas[areaKey]);
+    }
+  }
+
   /* Lead form */
   var form = document.getElementById('lead-form');
   if (!form) return;
