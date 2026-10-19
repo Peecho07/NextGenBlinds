@@ -16,6 +16,19 @@ const send = (res, code, body) => { res.writeHead(code, { 'Content-Type': 'appli
 
 http.createServer((req, res) => {
   const url = new URL(req.url, 'http://x');
+  // Netlify Forms emulation: urlencoded POST to "/" with form-name. Stores the fields like Netlify would.
+  if (req.method === 'POST' && url.pathname === '/') {
+    let raw = '';
+    req.on('data', c => { raw += c; if (raw.length > 8000) req.destroy(); });
+    req.on('end', () => {
+      if (process.env.FAIL === 'storage') { res.writeHead(500); return res.end('error'); }
+      const f = Object.fromEntries(new URLSearchParams(raw));
+      if (!f['form-name']) { res.writeHead(404); return res.end('not found'); }
+      if (!f.company) fs.appendFileSync(store, JSON.stringify({ netlifyForm: f['form-name'], receivedAt: new Date().toISOString(), fields: f }) + '\n');
+      res.writeHead(200, { 'Content-Type': 'text/html' }); res.end('<p>Thank you</p>');
+    });
+    return;
+  }
   if (url.pathname === '/api/lead') {
     if (req.method !== 'POST') return send(res, 405, { accepted: false, message: 'Method not allowed.' });
     let raw = '';

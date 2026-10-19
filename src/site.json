@@ -103,5 +103,7 @@
     "googleTagId": "",
     "googleAdsConversion": "",
     "metaPixelId": ""
-  }
+  },
+  "_formProviderNote": "Lead form backend: \"netlify\" (Netlify Forms, emails each lead) or \"api\" (Cloudflare function in functions/api/lead.js).",
+  "formProvider": "netlify"
 }

@@ -49,7 +49,10 @@
   <h3 id="form-title">Request a free consultation</h3>
   <p class="sub">Four quick details. We'll call within one business day to schedule a time that works. This is a request, not a booked appointment.</p>
   <div class="form-summary" id="form-summary" tabindex="-1" role="alert"></div>
-  <form id="lead-form" action="/api/lead" method="post" novalidate aria-labelledby="form-title" data-phone="561-332-8091" data-phone-e164="+15613328091">
+  <form id="lead-form" name="consultation" method="post" action="/thank-you/" data-netlify="true" netlify-honeypot="company" data-provider="netlify" novalidate aria-labelledby="form-title" data-phone="561-332-8091" data-phone-e164="+15613328091">
+    <input type="hidden" name="ref" value="">
+    <input type="hidden" name="page" value="">
+    <input type="hidden" name="attribution" value="">
     <div class="field">
       <label for="f-name">Name</label>
       <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="80">
@@ -174,6 +177,6 @@
 </footer>
 
 <div class="action-bar" id="action-bar"><a class="btn btn-secondary" href="tel:+15613328091">Call</a><a class="btn btn-primary" href="#lp-form">Free Consultation</a></div>
-<script src="/assets/js/site.js?v=3d085ef5" defer></script>
+<script src="/assets/js/site.js?v=95984cba" defer></script>
 </body>
 </html>

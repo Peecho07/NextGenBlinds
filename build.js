@@ -160,11 +160,20 @@ function interestOptions(selected) {
 function leadForm(selected) {
   return partial('lead-form')
     .replace('{{interestOptions}}', interestOptions(selected))
-    .replace('{{detailsOpen}}', selected ? ' open' : '');
+    .replace('{{detailsOpen}}', selected ? ' open' : '')
+    .replace('{{formAttrs}}', formAttrs());
 }
 
 function faqHtml(list) {
   return list.map(([q, a]) => `<details><summary>${esc(q)}</summary><div class="ans"><p>${esc(a)}</p></div></details>`).join('\n');
+}
+
+// Lead form backend. "netlify" = Netlify Forms (Netlify stores and emails each lead).
+// "api" = the Cloudflare function in functions/api/lead.js.
+function formAttrs() {
+  return (site.formProvider || 'netlify') === 'netlify'
+    ? 'action="/thank-you/" data-netlify="true" netlify-honeypot="company" data-provider="netlify"'
+    : 'action="/api/lead" data-provider="api" data-api="/api/lead"';
 }
 
 // ---------- Templating ----------

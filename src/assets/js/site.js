@@ -197,6 +197,7 @@
   var submit = form.querySelector('button[type="submit"]');
   var submitLabel = submit.querySelector('.label');
   var idemKey = null;
+  var leadRef = null;
 
   function setStatus(kind, html) {
     status.className = 'form-status' + (kind ? ' show ' + kind : '');
@@ -219,26 +220,38 @@
 
     // Same key for retries of the same attempt, so double clicks and retries cannot create duplicates.
     if (!idemKey) idemKey = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2));
+    var base = document.documentElement.getAttribute('data-base') || '';
+    var netlify = form.getAttribute('data-provider') === 'netlify';
+    var srcRaw = safeStore.get('sessionStorage', 'ng_src') || '';
+    if (!leadRef) leadRef = newRef();
+    // Netlify adds form-name to the deployed HTML; add it here too so local tests and older builds match.
+    if (netlify && !form.elements['form-name']) { var fn = document.createElement('input'); fn.type = 'hidden'; fn.name = 'form-name'; fn.value = form.getAttribute('name'); form.appendChild(fn); }
+    setHidden('ref', leadRef);
+    setHidden('page', location.pathname);
+    setHidden('attribution', netlify ? readableSource(srcRaw) : srcRaw);
     var data = Object.fromEntries(new FormData(form).entries());
-    data.page = location.pathname;
-    data.attribution = safeStore.get('sessionStorage', 'ng_src') || '';
 
     submit.disabled = true; form.classList.add('is-submitting'); submitLabel.textContent = 'Sending your request…';
     setStatus('wait', 'Sending your request. Please keep this page open.');
 
     var ctrl = new AbortController();
     var timer = setTimeout(function () { ctrl.abort(); }, 15000);
-    fetch(form.action, {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idemKey },
-      body: JSON.stringify(data), signal: ctrl.signal
-    }).then(function (res) {
+    // Netlify Forms: a standard urlencoded post to "/". Netlify stores it and emails the notification.
+    // API mode: JSON to /api/lead (the Cloudflare function), which returns its own reference.
+    var request = netlify
+      ? fetch(base + '/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form)).toString(), signal: ctrl.signal })
+      : fetch(form.getAttribute('data-api'), { method: 'POST', headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idemKey },
+          body: JSON.stringify(data), signal: ctrl.signal });
+    request.then(function (res) {
+      if (netlify) return { res: res, body: res.ok ? { accepted: true, id: leadRef } : { message: 'We could not send your request.' } };
       return res.json().catch(function () { return {}; }).then(function (body) { return { res: res, body: body }; });
     }).then(function (r) {
       clearTimeout(timer);
       if (r.res.ok && r.body && r.body.accepted && r.body.id) {
         // Only a durable server acceptance reaches the confirmation page.
         safeStore.set('sessionStorage', 'ng_lead', JSON.stringify({ id: r.body.id, method: data.contact_method, at: Date.now() }));
-        location.assign((document.documentElement.getAttribute('data-base') || '') + '/thank-you/?ref=' + encodeURIComponent(r.body.id));
+        location.assign(base + '/thank-you/?ref=' + encodeURIComponent(r.body.id));
         return;
       }
       var msg = (r.body && r.body.message) || 'We could not send your request.';
@@ -254,6 +267,23 @@
       fail('We could not reach our server. Your details are still here.', 0);
     });
   });
+
+  // Reference shown to the customer and included in the lead email, e.g. NG-261018-4F2A9C. Reused on retries.
+  function newRef() {
+    var d = new Date(), p = function (n) { return String(n).padStart(2, '0'); };
+    var rand = Array.prototype.map.call(crypto.getRandomValues(new Uint8Array(3)), function (b) { return b.toString(16).padStart(2, '0'); }).join('').toUpperCase();
+    return 'NG-' + String(d.getFullYear()).slice(2) + p(d.getMonth() + 1) + p(d.getDate()) + '-' + rand;
+  }
+  function setHidden(name, value) { var el = form.elements[name]; if (el) el.value = value; }
+  // Turns the stored campaign tags into one readable line for the lead email.
+  function readableSource(raw) {
+    var s = {}; try { s = JSON.parse(raw || '{}'); } catch (e) {}
+    var parts = [];
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'].forEach(function (k) { if (s[k]) parts.push(k.replace('utm_', '') + ': ' + s[k]); });
+    if (s.landing) parts.push('first page: ' + s.landing);
+    if (s.ref) parts.push('referrer: ' + s.ref);
+    return parts.join(' | ') || 'direct';
+  }
 
   function fail(msg, code) {
     submit.disabled = false; form.classList.remove('is-submitting'); submitLabel.textContent = 'Try Again';
